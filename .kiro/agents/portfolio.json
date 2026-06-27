@@ -1,0 +1,20 @@
+{
+  "name": "portfolio",
+  "description": "Rachel Keys Photography assistant — portfolio site, CMS hub, and AWS infra",
+  "prompt": "file://.kiro/prompts/portfolio-agent.txt",
+  "tools": ["read", "write", "shell", "grep", "glob", "code", "use_aws"],
+  "allowedTools": ["read", "grep", "glob"],
+  "toolsSettings": {
+    "write": {
+      "allowedPaths": ["./**"],
+      "deniedPaths": [".kiro/agents/**"]
+    },
+    "shell": {
+      "autoAllowReadonly": true
+    }
+  },
+  "resources": [
+    "file://.kiro/steering/**/*.md"
+  ],
+  "welcomeMessage": "Ready to help build Rachel's portfolio. What are we working on?"
+}

@@ -1,0 +1,377 @@
+{
+  "/RachelKeysPhotographyStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/AWSCloudFrontPartitionHostedZoneIdMap": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AWSCloudFrontPartitionHostedZoneIdMap"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ARecord2 in aws-cdk-lib...",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:27:5)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/PortfolioBucketName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PortfolioBucketName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:49:5)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/CmsBucketName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CmsBucketName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:50:5)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/PhotosBucketName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PhotosBucketName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:51:5)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/PortfolioDistributionUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PortfolioDistributionUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:52:5)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/CmsDistributionUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CmsDistributionUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:53:5)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/HostedZoneId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HostedZoneId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:54:5)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/PortfolioARecord/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PortfolioARecordE02F6A15"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ARecord2 in aws-cdk-lib...",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:27:5)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/PortfolioAaaaRecord/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PortfolioAaaaRecord6748D053"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new AaaaRecord2 in aws-cdk-lib...",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:31:5)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/CmsARecord/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CmsARecord961A72BC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ARecord2 in aws-cdk-lib...",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:37:5)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/CmsAaaaRecord/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CmsAaaaRecord274975D0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new AaaaRecord2 in aws-cdk-lib...",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:42:5)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/Dns/Certificate/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DnsCertificateEFDADC48"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Certificate2 in aws-cdk-lib...",
+        "new DnsConstruct (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/dns.ts:24:24)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:14:17)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/PhotosBucket/Bucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PhotosBucket0A0467F9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "new PhotosBucket (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/photos-bucket.ts:11:19)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:15:20)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/PortfolioSite/Bucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PortfolioSiteBucket53FAE798"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "new PortfolioSite (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/portfolio-site.ts:19:19)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:17:23)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/PortfolioSite/Distribution/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PortfolioSiteDistribution1DD55D30"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Distribution2 in aws-cdk-lib...",
+        "new PortfolioSite (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/portfolio-site.ts:24:25)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:17:23)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/CmsHub/Bucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CmsHubBucket56FD7DEA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "new CmsHub (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/cms-hub.ts:21:19)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:21:17)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/CmsHub/Distribution/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CmsHubDistribution5CCE36E7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Distribution2 in aws-cdk-lib...",
+        "new CmsHub (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/cms-hub.ts:26:25)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:21:17)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/PhotosBucket/Bucket/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PhotosBucketPolicyAB496D63"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addToResourcePolicy in aws-cdk-lib...",
+        "new CmsHub (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/cms-hub.ts:47:24)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:21:17)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/PortfolioSite/Bucket/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PortfolioSiteBucketPolicy6DF755CF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/CmsHub/Bucket/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CmsHubBucketPolicy6CD97625"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/PortfolioSite/Distribution/Origin1/S3OriginAccessControl/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PortfolioSiteDistributionOrigin1S3OriginAccessControlC3191E99"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Distribution2 in aws-cdk-lib...",
+        "new PortfolioSite (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/portfolio-site.ts:24:25)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:17:23)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)"
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/CmsHub/Distribution/Origin1/S3OriginAccessControl/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CmsHubDistributionOrigin1S3OriginAccessControl00B38B68"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Distribution2 in aws-cdk-lib...",
+        "new CmsHub (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/cms-hub.ts:26:25)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:21:17)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)"
+      ]
+    }
+  ]
+}

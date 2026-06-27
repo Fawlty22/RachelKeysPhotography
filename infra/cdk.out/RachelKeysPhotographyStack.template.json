@@ -1,0 +1,638 @@
+{
+ "Resources": {
+  "DnsCertificateEFDADC48": {
+   "Type": "AWS::CertificateManager::Certificate",
+   "Properties": {
+    "DomainName": "rachelkeysphotography.com",
+    "DomainValidationOptions": [
+     {
+      "DomainName": "rachelkeysphotography.com",
+      "HostedZoneId": "Z00223002OWW3IJX21IC9"
+     },
+     {
+      "DomainName": "admin.rachelkeysphotography.com",
+      "HostedZoneId": "Z00223002OWW3IJX21IC9"
+     }
+    ],
+    "SubjectAlternativeNames": [
+     "admin.rachelkeysphotography.com"
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "RachelKeysPhotographyStack/Dns/Certificate"
+     }
+    ],
+    "ValidationMethod": "DNS"
+   },
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/Dns/Certificate/Resource"
+   }
+  },
+  "PhotosBucket0A0467F9": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "CorsConfiguration": {
+     "CorsRules": [
+      {
+       "AllowedHeaders": [
+        "*"
+       ],
+       "AllowedMethods": [
+        "GET",
+        "HEAD",
+        "PUT",
+        "POST",
+        "DELETE"
+       ],
+       "AllowedOrigins": [
+        "https://admin.rachelkeysphotography.com"
+       ]
+      }
+     ]
+    },
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true,
+     "RestrictPublicBuckets": true
+    },
+    "VersioningConfiguration": {
+     "Status": "Enabled"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/PhotosBucket/Bucket/Resource"
+   }
+  },
+  "PhotosBucketPolicyAB496D63": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "PhotosBucket0A0467F9"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:DeleteObject"
+       ],
+       "Condition": {
+        "StringEquals": {
+         "AWS:SourceArn": {
+          "Fn::Join": [
+           "",
+           [
+            "arn:aws:cloudfront::007427215722:distribution/",
+            {
+             "Ref": "CmsHubDistribution5CCE36E7"
+            }
+           ]
+          ]
+         }
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "cloudfront.amazonaws.com"
+       },
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::GetAtt": [
+            "PhotosBucket0A0467F9",
+            "Arn"
+           ]
+          },
+          "/*"
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/PhotosBucket/Bucket/Policy/Resource"
+   }
+  },
+  "PortfolioSiteBucket53FAE798": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true,
+     "RestrictPublicBuckets": true
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/PortfolioSite/Bucket/Resource"
+   }
+  },
+  "PortfolioSiteBucketPolicy6DF755CF": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "PortfolioSiteBucket53FAE798"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:GetObject",
+       "Condition": {
+        "StringEquals": {
+         "AWS:SourceArn": {
+          "Fn::Join": [
+           "",
+           [
+            "arn:",
+            {
+             "Ref": "AWS::Partition"
+            },
+            ":cloudfront::",
+            {
+             "Ref": "AWS::AccountId"
+            },
+            ":distribution/",
+            {
+             "Ref": "PortfolioSiteDistribution1DD55D30"
+            }
+           ]
+          ]
+         }
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "cloudfront.amazonaws.com"
+       },
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::GetAtt": [
+            "PortfolioSiteBucket53FAE798",
+            "Arn"
+           ]
+          },
+          "/*"
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/PortfolioSite/Bucket/Policy/Resource"
+   }
+  },
+  "PortfolioSiteDistributionOrigin1S3OriginAccessControlC3191E99": {
+   "Type": "AWS::CloudFront::OriginAccessControl",
+   "Properties": {
+    "OriginAccessControlConfig": {
+     "Name": "RachelKeysPhotographyStackPoOrigin1S3OriginAccessControl6D11F636",
+     "OriginAccessControlOriginType": "s3",
+     "SigningBehavior": "always",
+     "SigningProtocol": "sigv4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/PortfolioSite/Distribution/Origin1/S3OriginAccessControl/Resource"
+   }
+  },
+  "PortfolioSiteDistribution1DD55D30": {
+   "Type": "AWS::CloudFront::Distribution",
+   "Properties": {
+    "DistributionConfig": {
+     "Aliases": [
+      "rachelkeysphotography.com"
+     ],
+     "CustomErrorResponses": [
+      {
+       "ErrorCode": 404,
+       "ResponseCode": 200,
+       "ResponsePagePath": "/index.html"
+      }
+     ],
+     "DefaultCacheBehavior": {
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "Compress": true,
+      "TargetOriginId": "RachelKeysPhotographyStackPortfolioSiteDistributionOrigin1B05D6DF5",
+      "ViewerProtocolPolicy": "redirect-to-https"
+     },
+     "DefaultRootObject": "index.html",
+     "Enabled": true,
+     "HttpVersion": "http2",
+     "IPV6Enabled": true,
+     "Origins": [
+      {
+       "DomainName": {
+        "Fn::GetAtt": [
+         "PortfolioSiteBucket53FAE798",
+         "RegionalDomainName"
+        ]
+       },
+       "Id": "RachelKeysPhotographyStackPortfolioSiteDistributionOrigin1B05D6DF5",
+       "OriginAccessControlId": {
+        "Fn::GetAtt": [
+         "PortfolioSiteDistributionOrigin1S3OriginAccessControlC3191E99",
+         "Id"
+        ]
+       },
+       "S3OriginConfig": {
+        "OriginAccessIdentity": ""
+       }
+      }
+     ],
+     "ViewerCertificate": {
+      "AcmCertificateArn": {
+       "Ref": "DnsCertificateEFDADC48"
+      },
+      "MinimumProtocolVersion": "TLSv1.2_2021",
+      "SslSupportMethod": "sni-only"
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/PortfolioSite/Distribution/Resource"
+   }
+  },
+  "CmsHubBucket56FD7DEA": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true,
+     "RestrictPublicBuckets": true
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/CmsHub/Bucket/Resource"
+   }
+  },
+  "CmsHubBucketPolicy6CD97625": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "CmsHubBucket56FD7DEA"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:GetObject",
+       "Condition": {
+        "StringEquals": {
+         "AWS:SourceArn": {
+          "Fn::Join": [
+           "",
+           [
+            "arn:",
+            {
+             "Ref": "AWS::Partition"
+            },
+            ":cloudfront::",
+            {
+             "Ref": "AWS::AccountId"
+            },
+            ":distribution/",
+            {
+             "Ref": "CmsHubDistribution5CCE36E7"
+            }
+           ]
+          ]
+         }
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "cloudfront.amazonaws.com"
+       },
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::GetAtt": [
+            "CmsHubBucket56FD7DEA",
+            "Arn"
+           ]
+          },
+          "/*"
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/CmsHub/Bucket/Policy/Resource"
+   }
+  },
+  "CmsHubDistributionOrigin1S3OriginAccessControl00B38B68": {
+   "Type": "AWS::CloudFront::OriginAccessControl",
+   "Properties": {
+    "OriginAccessControlConfig": {
+     "Name": "RachelKeysPhotographyStackCmOrigin1S3OriginAccessControl5D96F11E",
+     "OriginAccessControlOriginType": "s3",
+     "SigningBehavior": "always",
+     "SigningProtocol": "sigv4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/CmsHub/Distribution/Origin1/S3OriginAccessControl/Resource"
+   }
+  },
+  "CmsHubDistribution5CCE36E7": {
+   "Type": "AWS::CloudFront::Distribution",
+   "Properties": {
+    "DistributionConfig": {
+     "Aliases": [
+      "admin.rachelkeysphotography.com"
+     ],
+     "CustomErrorResponses": [
+      {
+       "ErrorCode": 404,
+       "ResponseCode": 200,
+       "ResponsePagePath": "/index.html"
+      }
+     ],
+     "DefaultCacheBehavior": {
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "Compress": true,
+      "TargetOriginId": "RachelKeysPhotographyStackCmsHubDistributionOrigin145F0381B",
+      "ViewerProtocolPolicy": "redirect-to-https"
+     },
+     "DefaultRootObject": "index.html",
+     "Enabled": true,
+     "HttpVersion": "http2",
+     "IPV6Enabled": true,
+     "Origins": [
+      {
+       "DomainName": {
+        "Fn::GetAtt": [
+         "CmsHubBucket56FD7DEA",
+         "RegionalDomainName"
+        ]
+       },
+       "Id": "RachelKeysPhotographyStackCmsHubDistributionOrigin145F0381B",
+       "OriginAccessControlId": {
+        "Fn::GetAtt": [
+         "CmsHubDistributionOrigin1S3OriginAccessControl00B38B68",
+         "Id"
+        ]
+       },
+       "S3OriginConfig": {
+        "OriginAccessIdentity": ""
+       }
+      }
+     ],
+     "ViewerCertificate": {
+      "AcmCertificateArn": {
+       "Ref": "DnsCertificateEFDADC48"
+      },
+      "MinimumProtocolVersion": "TLSv1.2_2021",
+      "SslSupportMethod": "sni-only"
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/CmsHub/Distribution/Resource"
+   }
+  },
+  "PortfolioARecordE02F6A15": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "AliasTarget": {
+     "DNSName": {
+      "Fn::GetAtt": [
+       "PortfolioSiteDistribution1DD55D30",
+       "DomainName"
+      ]
+     },
+     "HostedZoneId": {
+      "Fn::FindInMap": [
+       "AWSCloudFrontPartitionHostedZoneIdMap",
+       {
+        "Ref": "AWS::Partition"
+       },
+       "zoneId"
+      ]
+     }
+    },
+    "HostedZoneId": "Z00223002OWW3IJX21IC9",
+    "Name": "rachelkeysphotography.com.",
+    "Type": "A"
+   },
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/PortfolioARecord/Resource"
+   }
+  },
+  "PortfolioAaaaRecord6748D053": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "AliasTarget": {
+     "DNSName": {
+      "Fn::GetAtt": [
+       "PortfolioSiteDistribution1DD55D30",
+       "DomainName"
+      ]
+     },
+     "HostedZoneId": {
+      "Fn::FindInMap": [
+       "AWSCloudFrontPartitionHostedZoneIdMap",
+       {
+        "Ref": "AWS::Partition"
+       },
+       "zoneId"
+      ]
+     }
+    },
+    "HostedZoneId": "Z00223002OWW3IJX21IC9",
+    "Name": "rachelkeysphotography.com.",
+    "Type": "AAAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/PortfolioAaaaRecord/Resource"
+   }
+  },
+  "CmsARecord961A72BC": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "AliasTarget": {
+     "DNSName": {
+      "Fn::GetAtt": [
+       "CmsHubDistribution5CCE36E7",
+       "DomainName"
+      ]
+     },
+     "HostedZoneId": {
+      "Fn::FindInMap": [
+       "AWSCloudFrontPartitionHostedZoneIdMap",
+       {
+        "Ref": "AWS::Partition"
+       },
+       "zoneId"
+      ]
+     }
+    },
+    "HostedZoneId": "Z00223002OWW3IJX21IC9",
+    "Name": "admin.rachelkeysphotography.com.",
+    "Type": "A"
+   },
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/CmsARecord/Resource"
+   }
+  },
+  "CmsAaaaRecord274975D0": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "AliasTarget": {
+     "DNSName": {
+      "Fn::GetAtt": [
+       "CmsHubDistribution5CCE36E7",
+       "DomainName"
+      ]
+     },
+     "HostedZoneId": {
+      "Fn::FindInMap": [
+       "AWSCloudFrontPartitionHostedZoneIdMap",
+       {
+        "Ref": "AWS::Partition"
+       },
+       "zoneId"
+      ]
+     }
+    },
+    "HostedZoneId": "Z00223002OWW3IJX21IC9",
+    "Name": "admin.rachelkeysphotography.com.",
+    "Type": "AAAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/CmsAaaaRecord/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/3WMwU7EMAxEv2XvqSktcC/dKwK1H4C8rlt5202qxGGFovw7KkXavXCaeTMeV1C9lFAe8BoKGuZikROkXpFm03Fw0RMbvIbPROxVRiFUvqDFiT2k9paZdrR3mE2oIb1Gmlm36s/t8uEWoe9bvHM2tLg4jN5ZhXSUoF5OUcVZ09fvXiaxDRGH0Dqr3i3b/p/4fpyNd1H5uYbUdEzOD9vF7npW0yDiTjlvzRuuq9jp93vUNWo21g0M5/DwVVXw+ATl4RxECh+tyoWh2/UHzWD+oUkBAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Mappings": {
+  "AWSCloudFrontPartitionHostedZoneIdMap": {
+   "aws": {
+    "zoneId": "Z2FDTNDATAQYW2"
+   },
+   "aws-cn": {
+    "zoneId": "Z3RFFRIM2A3IF5"
+   }
+  }
+ },
+ "Outputs": {
+  "PortfolioBucketName": {
+   "Value": {
+    "Ref": "PortfolioSiteBucket53FAE798"
+   }
+  },
+  "CmsBucketName": {
+   "Value": {
+    "Ref": "CmsHubBucket56FD7DEA"
+   }
+  },
+  "PhotosBucketName": {
+   "Value": {
+    "Ref": "PhotosBucket0A0467F9"
+   }
+  },
+  "PortfolioDistributionUrl": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Fn::GetAtt": [
+        "PortfolioSiteDistribution1DD55D30",
+        "DomainName"
+       ]
+      }
+     ]
+    ]
+   }
+  },
+  "CmsDistributionUrl": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Fn::GetAtt": [
+        "CmsHubDistribution5CCE36E7",
+        "DomainName"
+       ]
+      }
+     ]
+    ]
+   }
+  },
+  "HostedZoneId": {
+   "Value": "Z00223002OWW3IJX21IC9"
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

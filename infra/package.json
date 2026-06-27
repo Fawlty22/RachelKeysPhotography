@@ -1,0 +1,20 @@
+{
+  "name": "rachel-keys-photography-infra",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "cdk": "cdk",
+    "synth": "cdk synth"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.260.0",
+    "constructs": "10.6.0"
+  },
+  "devDependencies": {
+    "aws-cdk": "2.1128.1",
+    "typescript": "5.8.3",
+    "ts-node": "10.9.2",
+    "@types/node": "22.15.29"
+  }
+}
