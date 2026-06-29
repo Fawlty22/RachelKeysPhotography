@@ -6,20 +6,20 @@ interface AuthGuardProps {
 }
 
 export function AuthGuard({ children }: AuthGuardProps) {
-  const [status, setStatus] = useState<'loading' | 'authenticated' | 'redirecting'>('loading');
+  const [status, setStatus] = useState<'loading' | 'authenticated' | 'redirecting' | 'error'>('loading');
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const code = params.get('code');
 
     if (code) {
-      // Clear the code from the URL without reloading
       window.history.replaceState({}, '', window.location.pathname);
       exchangeCodeForTokens(code)
         .then(() => setStatus('authenticated'))
-        .catch(() => {
-          clearSession();
-          window.location.href = getHostedUiLoginUrl();
+        .catch((e: unknown) => {
+          setError(e instanceof Error ? e.message : String(e));
+          setStatus('error');
         });
       return;
     }
@@ -31,6 +31,21 @@ export function AuthGuard({ children }: AuthGuardProps) {
       window.location.href = getHostedUiLoginUrl();
     }
   }, []);
+
+  if (status === 'error') {
+    return (
+      <div className="flex h-screen flex-col items-center justify-center gap-4 p-8">
+        <p className="text-destructive font-medium">Authentication failed</p>
+        <pre className="text-xs bg-muted p-4 rounded max-w-xl overflow-auto">{error}</pre>
+        <button
+          className="underline text-sm"
+          onClick={() => { clearSession(); window.location.href = getHostedUiLoginUrl(); }}
+        >
+          Try again
+        </button>
+      </div>
+    );
+  }
 
   if (status === 'loading' || status === 'redirecting') {
     return (

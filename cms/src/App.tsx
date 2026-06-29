@@ -8,8 +8,8 @@ import { ContentPage } from '@/pages/ContentPage';
 
 export default function App() {
   return (
-    <AuthGuard>
-      <BrowserRouter>
+    <BrowserRouter>
+      <AuthGuard>
         <Routes>
           <Route element={<ShellLayout />}>
             <Route index element={<DashboardPage />} />
@@ -18,7 +18,7 @@ export default function App() {
             <Route path="content" element={<ContentPage />} />
           </Route>
         </Routes>
-      </BrowserRouter>
-    </AuthGuard>
+      </AuthGuard>
+    </BrowserRouter>
   );
 }
