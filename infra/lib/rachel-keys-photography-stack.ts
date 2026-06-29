@@ -7,6 +7,8 @@ import { PhotosBucket } from './photos-bucket';
 import { PortfolioSite } from './portfolio-site';
 import { CmsHub } from './cms-hub';
 import { CmsAuth } from './cms-auth';
+import { CmsIdentityPool } from './cms-identity-pool';
+import { PhotosCdn } from './photos-cdn';
 
 export class RachelKeysPhotographyStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -20,9 +22,20 @@ export class RachelKeysPhotographyStack extends cdk.Stack {
       certificate: dns.certificate,
     });
 
+    new CmsIdentityPool(this, 'CmsIdentityPool', {
+      userPool: auth.userPool,
+      userPoolClient: auth.userPoolClient,
+      photosBucket: photos.bucket,
+    });
+
     const cms = new CmsHub(this, 'CmsHub', {
       certificate: dns.certificate,
       photosBucket: photos.bucket,
+    });
+
+    const photosCdn = new PhotosCdn(this, 'PhotosCdn', {
+      photosBucket: photos.bucket,
+      certificate: dns.certificate,
     });
 
     // Apex A + AAAA → portfolio CloudFront
@@ -47,12 +60,25 @@ export class RachelKeysPhotographyStack extends cdk.Stack {
       target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(cms.distribution)),
     });
 
+    // photos.rachelkeysphotography.com A + AAAA → photos CloudFront
+    new route53.ARecord(this, 'PhotosARecord', {
+      zone: dns.hostedZone,
+      recordName: 'photos',
+      target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(photosCdn.distribution)),
+    });
+    new route53.AaaaRecord(this, 'PhotosAaaaRecord', {
+      zone: dns.hostedZone,
+      recordName: 'photos',
+      target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(photosCdn.distribution)),
+    });
+
     // Outputs
     new cdk.CfnOutput(this, 'PortfolioBucketName', { value: portfolio.bucket.bucketName });
     new cdk.CfnOutput(this, 'CmsBucketName', { value: cms.bucket.bucketName });
     new cdk.CfnOutput(this, 'PhotosBucketName', { value: photos.bucket.bucketName });
     new cdk.CfnOutput(this, 'PortfolioDistributionUrl', { value: `https://${portfolio.distribution.distributionDomainName}` });
     new cdk.CfnOutput(this, 'CmsDistributionUrl', { value: `https://${cms.distribution.distributionDomainName}` });
+    new cdk.CfnOutput(this, 'PhotosCdnUrl', { value: 'https://photos.rachelkeysphotography.com' });
     new cdk.CfnOutput(this, 'HostedZoneId', { value: dns.hostedZone.hostedZoneId });
     new cdk.CfnOutput(this, 'CognitoUserPoolId', { value: auth.userPool.userPoolId });
     new cdk.CfnOutput(this, 'CognitoClientId', { value: auth.userPoolClient.userPoolClientId });

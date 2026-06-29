@@ -32,9 +32,11 @@
 | Portfolio bucket | `rachelkeysphotographystac-portfoliositebucket53fae-do3ngwn5zvv8` |
 | CMS bucket | `rachelkeysphotographystack-cmshubbucket56fd7dea-wwtjgn9bu0ig` |
 | Photos bucket | `rachelkeysphotographystack-photosbucket0a0467f9-fvaw0fcrd6ih` |
+| Photos CDN | `https://photos.rachelkeysphotography.com` |
 | Portfolio CloudFront | `https://d1wtwqee7v5syi.cloudfront.net` |
 | CMS CloudFront | `https://d22v6dpfs2idgf.cloudfront.net` |
 | Hosted Zone ID | `Z00223002OWW3IJX21IC9` |
+| CMS Identity Pool ID | `us-east-1:1375fd5e-7b0c-4a0e-b8e9-6a7195c5a413` |
 
 ### CDK commands (run from `/infra`)
 ```

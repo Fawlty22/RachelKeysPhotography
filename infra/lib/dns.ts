@@ -23,7 +23,7 @@ export class DnsConstruct extends Construct {
     // DNS validation records are created automatically in the hosted zone above.
     this.certificate = new acm.Certificate(this, 'Certificate', {
       domainName: DOMAIN,
-      subjectAlternativeNames: [`admin.${DOMAIN}`],
+      subjectAlternativeNames: [`admin.${DOMAIN}`, `photos.${DOMAIN}`],
       validation: acm.CertificateValidation.fromDns(this.hostedZone),
     });
   }
