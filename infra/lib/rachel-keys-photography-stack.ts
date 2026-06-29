@@ -6,6 +6,7 @@ import { DnsConstruct } from './dns';
 import { PhotosBucket } from './photos-bucket';
 import { PortfolioSite } from './portfolio-site';
 import { CmsHub } from './cms-hub';
+import { CmsAuth } from './cms-auth';
 
 export class RachelKeysPhotographyStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -13,6 +14,7 @@ export class RachelKeysPhotographyStack extends cdk.Stack {
 
     const dns = new DnsConstruct(this, 'Dns');
     const photos = new PhotosBucket(this, 'PhotosBucket');
+    const auth = new CmsAuth(this, 'CmsAuth');
 
     const portfolio = new PortfolioSite(this, 'PortfolioSite', {
       certificate: dns.certificate,
@@ -52,5 +54,8 @@ export class RachelKeysPhotographyStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'PortfolioDistributionUrl', { value: `https://${portfolio.distribution.distributionDomainName}` });
     new cdk.CfnOutput(this, 'CmsDistributionUrl', { value: `https://${cms.distribution.distributionDomainName}` });
     new cdk.CfnOutput(this, 'HostedZoneId', { value: dns.hostedZone.hostedZoneId });
+    new cdk.CfnOutput(this, 'CognitoUserPoolId', { value: auth.userPool.userPoolId });
+    new cdk.CfnOutput(this, 'CognitoClientId', { value: auth.userPoolClient.userPoolClientId });
+    new cdk.CfnOutput(this, 'CognitoHostedUiUrl', { value: auth.userPoolDomain.baseUrl() });
   }
 }

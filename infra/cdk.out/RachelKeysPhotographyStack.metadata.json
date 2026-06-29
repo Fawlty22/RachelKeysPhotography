@@ -17,7 +17,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new ARecord2 in aws-cdk-lib...",
-        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:27:5)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:29:5)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
         "...node internals, ts-node..."
       ]
@@ -31,7 +31,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:49:5)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:51:5)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
         "...node internals, ts-node, ts-node..."
       ]
@@ -45,7 +45,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:50:5)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:52:5)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
         "...node internals, ts-node, ts-node..."
       ]
@@ -59,7 +59,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:51:5)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:53:5)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
         "...node internals, ts-node, ts-node..."
       ]
@@ -73,7 +73,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:52:5)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:54:5)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
         "...node internals, ts-node, ts-node..."
       ]
@@ -87,7 +87,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:53:5)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:55:5)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
         "...node internals, ts-node, ts-node..."
       ]
@@ -101,7 +101,49 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:54:5)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:56:5)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/CognitoUserPoolId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CognitoUserPoolId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:57:5)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/CognitoClientId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CognitoClientId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:58:5)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/CognitoHostedUiUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CognitoHostedUiUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:59:5)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
         "...node internals, ts-node, ts-node..."
       ]
@@ -142,7 +184,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new ARecord2 in aws-cdk-lib...",
-        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:27:5)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:29:5)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
         "...node internals, ts-node, ts-node..."
       ]
@@ -157,7 +199,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new AaaaRecord2 in aws-cdk-lib...",
-        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:31:5)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:33:5)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
         "...node internals, ts-node, ts-node..."
       ]
@@ -172,7 +214,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new ARecord2 in aws-cdk-lib...",
-        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:37:5)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:39:5)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
         "...node internals, ts-node, ts-node..."
       ]
@@ -187,7 +229,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new AaaaRecord2 in aws-cdk-lib...",
-        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:42:5)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:44:5)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
         "...node internals, ts-node, ts-node..."
       ]
@@ -216,7 +258,7 @@
       "data": [
         "...new Certificate2 in aws-cdk-lib...",
         "new DnsConstruct (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/dns.ts:24:24)",
-        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:14:17)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:15:17)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
         "...node internals, ts-node, ts-node..."
       ]
@@ -232,7 +274,23 @@
       "data": [
         "...new Bucket2 in aws-cdk-lib...",
         "new PhotosBucket (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/photos-bucket.ts:11:19)",
-        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:15:20)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:16:20)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/CmsAuth/UserPool/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CmsAuthUserPool9FA41C77"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new UserPool2 in aws-cdk-lib...",
+        "new CmsAuth (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/cms-auth.ts:16:21)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:17:18)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
         "...node internals, ts-node, ts-node..."
       ]
@@ -248,7 +306,7 @@
       "data": [
         "...new Bucket2 in aws-cdk-lib...",
         "new PortfolioSite (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/portfolio-site.ts:19:19)",
-        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:17:23)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:19:23)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
         "...node internals, ts-node, ts-node..."
       ]
@@ -264,7 +322,7 @@
       "data": [
         "...new Distribution2 in aws-cdk-lib...",
         "new PortfolioSite (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/portfolio-site.ts:24:25)",
-        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:17:23)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:19:23)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
         "...node internals, ts-node, ts-node..."
       ]
@@ -280,7 +338,7 @@
       "data": [
         "...new Bucket2 in aws-cdk-lib...",
         "new CmsHub (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/cms-hub.ts:21:19)",
-        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:21:17)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:23:17)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
         "...node internals, ts-node, ts-node..."
       ]
@@ -296,7 +354,7 @@
       "data": [
         "...new Distribution2 in aws-cdk-lib...",
         "new CmsHub (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/cms-hub.ts:26:25)",
-        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:21:17)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:23:17)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
         "...node internals, ts-node, ts-node..."
       ]
@@ -312,9 +370,41 @@
       "data": [
         "...WrappedClass.addToResourcePolicy in aws-cdk-lib...",
         "new CmsHub (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/cms-hub.ts:47:24)",
-        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:21:17)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:23:17)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
         "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/CmsAuth/UserPool/CmsAppClient/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CmsAuthUserPoolCmsAppClient8BA4F7D0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addClient in aws-cdk-lib...",
+        "new CmsAuth (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/cms-auth.ts:31:41)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:17:18)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/CmsAuth/UserPool/HostedUiDomain/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CmsAuthUserPoolHostedUiDomain3779ABE2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addDomain in aws-cdk-lib...",
+        "new CmsAuth (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/cms-auth.ts:45:41)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:17:18)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
       ]
     }
   ],
@@ -354,7 +444,7 @@
       "data": [
         "...new Distribution2 in aws-cdk-lib...",
         "new PortfolioSite (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/portfolio-site.ts:24:25)",
-        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:17:23)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:19:23)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)"
       ]
     }
@@ -369,7 +459,7 @@
       "data": [
         "...new Distribution2 in aws-cdk-lib...",
         "new CmsHub (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/cms-hub.ts:26:25)",
-        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:21:17)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:23:17)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)"
       ]
     }

@@ -123,6 +123,100 @@
     "aws:cdk:path": "RachelKeysPhotographyStack/PhotosBucket/Bucket/Policy/Resource"
    }
   },
+  "CmsAuthUserPool9FA41C77": {
+   "Type": "AWS::Cognito::UserPool",
+   "Properties": {
+    "AccountRecoverySetting": {
+     "RecoveryMechanisms": [
+      {
+       "Name": "verified_email",
+       "Priority": 1
+      }
+     ]
+    },
+    "AdminCreateUserConfig": {
+     "AllowAdminCreateUserOnly": true
+    },
+    "AliasAttributes": [
+     "email"
+    ],
+    "AutoVerifiedAttributes": [
+     "email"
+    ],
+    "EmailVerificationMessage": "The verification code to your new account is {####}",
+    "EmailVerificationSubject": "Verify your new account",
+    "Policies": {
+     "PasswordPolicy": {
+      "MinimumLength": 12,
+      "RequireLowercase": true,
+      "RequireNumbers": true,
+      "RequireSymbols": false,
+      "RequireUppercase": true
+     }
+    },
+    "SmsVerificationMessage": "The verification code to your new account is {####}",
+    "UserPoolName": "rachelkeys-cms-users",
+    "VerificationMessageTemplate": {
+     "DefaultEmailOption": "CONFIRM_WITH_CODE",
+     "EmailMessage": "The verification code to your new account is {####}",
+     "EmailSubject": "Verify your new account",
+     "SmsMessage": "The verification code to your new account is {####}"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/CmsAuth/UserPool/Resource"
+   }
+  },
+  "CmsAuthUserPoolCmsAppClient8BA4F7D0": {
+   "Type": "AWS::Cognito::UserPoolClient",
+   "Properties": {
+    "AllowedOAuthFlows": [
+     "code"
+    ],
+    "AllowedOAuthFlowsUserPoolClient": true,
+    "AllowedOAuthScopes": [
+     "openid",
+     "email",
+     "profile"
+    ],
+    "CallbackURLs": [
+     "https://admin.rachelkeysphotography.com"
+    ],
+    "ClientName": "cms-app",
+    "ExplicitAuthFlows": [
+     "ALLOW_USER_SRP_AUTH",
+     "ALLOW_REFRESH_TOKEN_AUTH"
+    ],
+    "GenerateSecret": false,
+    "LogoutURLs": [
+     "https://admin.rachelkeysphotography.com"
+    ],
+    "PreventUserExistenceErrors": "ENABLED",
+    "SupportedIdentityProviders": [
+     "COGNITO"
+    ],
+    "UserPoolId": {
+     "Ref": "CmsAuthUserPool9FA41C77"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/CmsAuth/UserPool/CmsAppClient/Resource"
+   }
+  },
+  "CmsAuthUserPoolHostedUiDomain3779ABE2": {
+   "Type": "AWS::Cognito::UserPoolDomain",
+   "Properties": {
+    "Domain": "rachelkeys-cms",
+    "UserPoolId": {
+     "Ref": "CmsAuthUserPool9FA41C77"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/CmsAuth/UserPool/HostedUiDomain/Resource"
+   }
+  },
   "PortfolioSiteBucket53FAE798": {
    "Type": "AWS::S3::Bucket",
    "Properties": {
@@ -532,7 +626,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/3WMwU7EMAxEv2XvqSktcC/dKwK1H4C8rlt5202qxGGFovw7KkXavXCaeTMeV1C9lFAe8BoKGuZikROkXpFm03Fw0RMbvIbPROxVRiFUvqDFiT2k9paZdrR3mE2oIb1Gmlm36s/t8uEWoe9bvHM2tLg4jN5ZhXSUoF5OUcVZ09fvXiaxDRGH0Dqr3i3b/p/4fpyNd1H5uYbUdEzOD9vF7npW0yDiTjlvzRuuq9jp93vUNWo21g0M5/DwVVXw+ATl4RxECh+tyoWh2/UHzWD+oUkBAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/3WNQU/DMAyFf8vuqSktcC/dFTGt4oyy1Ku8tvGUOEwoyn9HJRvrhZPf+96zXUH1UkK50RdfmH4sJjpA7ESbUe3Rc3AGlb74z2jQCR3JaMFZWz2gg9jemWqPdmWT8jXE12BGlCW6qjx2PJH5vuPskzI8WBKG+OHR7ZinpfKnb6KdCK2soyu52S3Pmuy6kElSZuLQHx1bgbglL44OQYit6up3RwPZxhj0vmUrLn//B6+Xk3IcBJ9riM0eDbt+aWTVoahGa51dSkvyps9nssPv9SDnIElZ7hFO/uGrquDxCcrNyRMVLlihGWGf5w9aX9v3qgEAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "RachelKeysPhotographyStack/CDKMetadata/Default"
@@ -599,6 +693,30 @@
   },
   "HostedZoneId": {
    "Value": "Z00223002OWW3IJX21IC9"
+  },
+  "CognitoUserPoolId": {
+   "Value": {
+    "Ref": "CmsAuthUserPool9FA41C77"
+   }
+  },
+  "CognitoClientId": {
+   "Value": {
+    "Ref": "CmsAuthUserPoolCmsAppClient8BA4F7D0"
+   }
+  },
+  "CognitoHostedUiUrl": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "CmsAuthUserPoolHostedUiDomain3779ABE2"
+      },
+      ".auth.us-east-1.amazoncognito.com"
+     ]
+    ]
+   }
   }
  },
  "Parameters": {

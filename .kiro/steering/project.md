@@ -14,13 +14,24 @@ This project contains **two sites**:
 - Give Rachel full control over content updates without needing code changes or deployments
 
 ## Status
-Early-stage — frontend framework and CMS approach still TBD.
+Infra deployed. CMS app is next, then portfolio.
 
 ## Infrastructure (AWS)
-- **Deployment**: AWS (specific services TBD — likely S3 + CloudFront for the public site)
-- **Asset/Photo storage**: S3
-- **Backend/Database**: None planned — keep it serverless and static where possible
-- This may evolve, but start with the simplest viable AWS-hosted architecture
+- **Deployment**: S3 + CloudFront (deployed)
+- **Domain**: `rachelkeysphotography.com` registered and live
+- **Portfolio**: `rachelkeysphotography.com` → CloudFront → S3
+- **CMS hub**: `admin.rachelkeysphotography.com` → CloudFront → S3
+- **Asset/Photo storage**: S3 (separate photos bucket)
+- **Auth**: AWS Cognito User Pool — username/password, Cognito Hosted UI
+- **Backend/Database**: None — static/serverless only
+
+## Authentication (CMS hub only)
+- Provider: AWS Cognito User Pool
+- Flow: username + password (no social/federated login)
+- Login UI: Cognito Hosted UI (no custom login page needed)
+- Users: 1–2 accounts max (Rachel + Matt if needed)
+- The portfolio site has no auth — fully public
+- Cognito resources to be added to the CDK infra stack
 
 ## Tone & Style
 - Elegant, minimal, photography-first design
