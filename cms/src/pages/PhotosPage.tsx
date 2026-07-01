@@ -55,7 +55,7 @@ export function PhotosPage() {
   async function handleDelete(key: string) {
     if (!confirm("Delete this photo?")) return;
     try {
-      await deletePhoto(key);
+      await deletePhoto(key, location);
       setPhotos((prev) => prev.filter((p) => p.key !== key));
     } catch (e) {
       setError((e as Error).message);

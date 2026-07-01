@@ -34,8 +34,8 @@ export class CmsAuth extends Construct {
       oAuth: {
         flows: { authorizationCodeGrant: true },
         scopes: [cognito.OAuthScope.OPENID, cognito.OAuthScope.EMAIL, cognito.OAuthScope.PROFILE],
-        callbackUrls: [CMS_URL, 'http://localhost:5173'],
-        logoutUrls: [CMS_URL, 'http://localhost:5173'],
+        callbackUrls: [CMS_URL, 'http://localhost:5173', 'http://localhost:5174'],
+        logoutUrls: [CMS_URL, 'http://localhost:5173', 'http://localhost:5174'],
       },
       generateSecret: false,           // public SPA client — no secret
       preventUserExistenceErrors: true,

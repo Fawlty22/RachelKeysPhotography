@@ -21,7 +21,7 @@ export class PhotosBucket extends Construct {
             s3.HttpMethods.POST,
             s3.HttpMethods.DELETE,
           ],
-          allowedOrigins: ['https://admin.rachelkeysphotography.com', 'http://localhost:5173'],
+          allowedOrigins: ['https://admin.rachelkeysphotography.com', 'http://localhost:5173', 'http://localhost:5174'],
           allowedHeaders: ['*'],
         },
       ],

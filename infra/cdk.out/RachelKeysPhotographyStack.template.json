@@ -52,7 +52,8 @@
        ],
        "AllowedOrigins": [
         "https://admin.rachelkeysphotography.com",
-        "http://localhost:5173"
+        "http://localhost:5173",
+        "http://localhost:5174"
        ]
       }
      ]
@@ -233,7 +234,8 @@
     ],
     "CallbackURLs": [
      "https://admin.rachelkeysphotography.com",
-     "http://localhost:5173"
+     "http://localhost:5173",
+     "http://localhost:5174"
     ],
     "ClientName": "cms-app",
     "ExplicitAuthFlows": [
@@ -243,7 +245,8 @@
     "GenerateSecret": false,
     "LogoutURLs": [
      "https://admin.rachelkeysphotography.com",
-     "http://localhost:5173"
+     "http://localhost:5173",
+     "http://localhost:5174"
     ],
     "PreventUserExistenceErrors": "ENABLED",
     "SupportedIdentityProviders": [
@@ -801,6 +804,33 @@
     "aws:cdk:path": "RachelKeysPhotographyStack/CmsHub/Distribution/Resource"
    }
   },
+  "PhotosCdnShortTtlPolicyAB394BDF": {
+   "Type": "AWS::CloudFront::CachePolicy",
+   "Properties": {
+    "CachePolicyConfig": {
+     "DefaultTTL": 30,
+     "MaxTTL": 60,
+     "MinTTL": 0,
+     "Name": "RachelKeys-ContentShortTtl",
+     "ParametersInCacheKeyAndForwardedToOrigin": {
+      "CookiesConfig": {
+       "CookieBehavior": "none"
+      },
+      "EnableAcceptEncodingBrotli": false,
+      "EnableAcceptEncodingGzip": false,
+      "HeadersConfig": {
+       "HeaderBehavior": "none"
+      },
+      "QueryStringsConfig": {
+       "QueryStringBehavior": "none"
+      }
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/PhotosCdn/ShortTtlPolicy/Resource"
+   }
+  },
   "PhotosCdnDistributionOrigin1S3OriginAccessControlBB5D69BB": {
    "Type": "AWS::CloudFront::OriginAccessControl",
    "Properties": {
@@ -815,12 +845,37 @@
     "aws:cdk:path": "RachelKeysPhotographyStack/PhotosCdn/Distribution/Origin1/S3OriginAccessControl/Resource"
    }
   },
+  "PhotosCdnDistributionOrigin2S3OriginAccessControl4535F19B": {
+   "Type": "AWS::CloudFront::OriginAccessControl",
+   "Properties": {
+    "OriginAccessControlConfig": {
+     "Name": "RachelKeysPhotographyStackPhOrigin2S3OriginAccessControl9569353F",
+     "OriginAccessControlOriginType": "s3",
+     "SigningBehavior": "always",
+     "SigningProtocol": "sigv4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/PhotosCdn/Distribution/Origin2/S3OriginAccessControl/Resource"
+   }
+  },
   "PhotosCdnDistribution48F9A84C": {
    "Type": "AWS::CloudFront::Distribution",
    "Properties": {
     "DistributionConfig": {
      "Aliases": [
       "photos.rachelkeysphotography.com"
+     ],
+     "CacheBehaviors": [
+      {
+       "CachePolicyId": {
+        "Ref": "PhotosCdnShortTtlPolicyAB394BDF"
+       },
+       "Compress": true,
+       "PathPattern": "content/*",
+       "TargetOriginId": "RachelKeysPhotographyStackPhotosCdnDistributionOrigin2E1A18405",
+       "ViewerProtocolPolicy": "redirect-to-https"
+      }
      ],
      "DefaultCacheBehavior": {
       "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
@@ -843,6 +898,24 @@
        "OriginAccessControlId": {
         "Fn::GetAtt": [
          "PhotosCdnDistributionOrigin1S3OriginAccessControlBB5D69BB",
+         "Id"
+        ]
+       },
+       "S3OriginConfig": {
+        "OriginAccessIdentity": ""
+       }
+      },
+      {
+       "DomainName": {
+        "Fn::GetAtt": [
+         "PhotosBucket0A0467F9",
+         "RegionalDomainName"
+        ]
+       },
+       "Id": "RachelKeysPhotographyStackPhotosCdnDistributionOrigin2E1A18405",
+       "OriginAccessControlId": {
+        "Fn::GetAtt": [
+         "PhotosCdnDistributionOrigin2S3OriginAccessControl4535F19B",
          "Id"
         ]
        },
@@ -1035,7 +1108,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/3VQwW7CMAz9Fu4hY2XbvSuXHaahop1RSE0xtHaVOEMo6r9PbSntDjv5vednx3mJTt5WerUwV7+0xWVZ4UHHnRh7UTl4Ds6CMle/jxac4BGtEagNmRKcjtmkqexIM9oqv9bxPdgLSNe6o6FsuUJ7m+SBt8pySSis47cHt2WuOssDjyCrEEjmrbsy0g3XBmlumJSPAkhQbuP2Oc+5glTE2FMNJK2yFYfi6JhExw16cXgIgkxqt/5yWCKl1oL3GZO4Yds/8nz48cs93p9umCv95y40tY7dNd1wX6fExqwcB4HXtY5pDpZd0Vt7tANRqTFmYG3bHxakCX1mn6ZpkMpWERegz/7pJ0n084teLc4ecekCCdag86H+AiUr1fkeAgAA"
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/3VQQW7CQAx8S++LS0PbexouPVRFQT2jZWOCIVlHu94itMrfqySEhENPnhnbo9EkkLwvYfmkL35hivOioj3ErWhzVjl6Ds6g0he/iwad0IGMFqy11SU6iNmkqexgZ7RVfgXxI5gzSre6oWFsuCJzneSBt8pwaUkY4o9Ht2GuupM7HkFWEVqZr27KSNdca7Lzg0n5LNAKyXV0n/OcK0xFtDnWaKVVpuJQHBxbgbgmL472QYit2q6+HZVkU2PQ+4ytuMHtH/nhOdPmiFMDM3ovYEe3VA1zBQ+RSdcQu6Ddbz8nq9HFcRB8W0FMczTsiv60R1sUlWqtB9a2feYgTejr/NJNQ7ZsleUC4eSff5MEXl5h+XTyRAsXrFCNkA/zD/kE8lg5AgAA"
    },
    "Metadata": {
     "aws:cdk:path": "RachelKeysPhotographyStack/CDKMetadata/Default"

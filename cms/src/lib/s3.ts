@@ -73,12 +73,42 @@ export async function uploadPhoto(location: PhotoLocation, file: File): Promise<
     }),
   );
 
+  // Refresh the manifest so the portfolio site reflects the new photo
+  await refreshManifest(client, location);
+
   return { key, url: objectUrl(key) };
 }
 
-export async function deletePhoto(key: string): Promise<void> {
+export async function deletePhoto(key: string, location: PhotoLocation): Promise<void> {
   const client = getS3Client();
   await client.send(new DeleteObjectCommand({ Bucket: BUCKET, Key: key }));
+
+  // Refresh the manifest so the portfolio site no longer shows the deleted photo
+  await refreshManifest(client, location);
+}
+
+/**
+ * Lists all photos for a location and writes an updated manifest to
+ * content/manifest-{location}.json so the public portfolio can read them
+ * without needing S3 ListObjects access.
+ */
+async function refreshManifest(client: S3Client, location: PhotoLocation): Promise<void> {
+  const result = await client.send(
+    new ListObjectsV2Command({ Bucket: BUCKET, Prefix: keyPrefix(location) }),
+  );
+
+  const keys = (result.Contents ?? [])
+    .map(o => o.Key!)
+    .filter(k => k && k !== keyPrefix(location));
+
+  await client.send(
+    new PutObjectCommand({
+      Bucket: BUCKET,
+      Key: `content/manifest-${location}.json`,
+      Body: new TextEncoder().encode(JSON.stringify(keys)),
+      ContentType: 'application/json',
+    }),
+  );
 }
 
 const CONTENT_KEY = 'content/site-content.json';

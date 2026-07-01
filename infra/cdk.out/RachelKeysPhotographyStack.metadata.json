@@ -435,6 +435,22 @@
       ]
     }
   ],
+  "/RachelKeysPhotographyStack/PhotosCdn/ShortTtlPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PhotosCdnShortTtlPolicyAB394BDF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new CachePolicy2 in aws-cdk-lib...",
+        "new PhotosCdn (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/photos-cdn.ts:21:28)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:36:23)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
   "/RachelKeysPhotographyStack/PhotosCdn/Distribution/Resource": [
     {
       "type": "aws:cdk:logicalId",
@@ -444,7 +460,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Distribution2 in aws-cdk-lib...",
-        "new PhotosCdn (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/photos-cdn.ts:18:25)",
+        "new PhotosCdn (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/photos-cdn.ts:28:25)",
         "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:36:23)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
         "...node internals, ts-node, ts-node..."
@@ -628,9 +644,23 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Distribution2 in aws-cdk-lib...",
-        "new PhotosCdn (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/photos-cdn.ts:18:25)",
+        "new PhotosCdn (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/photos-cdn.ts:28:25)",
         "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:36:23)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)"
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/PhotosCdn/Distribution/Origin2/S3OriginAccessControl/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PhotosCdnDistributionOrigin2S3OriginAccessControl4535F19B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/matt/Desktop/RachelKeysPhotography/infra/node_modules/aws-cdk-lib/aws-cloudfront/lib/distribution.js:1:148 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
       ]
     }
   ]
