@@ -451,6 +451,38 @@
       ]
     }
   ],
+  "/RachelKeysPhotographyStack/PhotosCdn/PhotosCachePolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PhotosCdnPhotosCachePolicy050123F3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new CachePolicy2 in aws-cdk-lib...",
+        "new PhotosCdn (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/photos-cdn.ts:32:31)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:36:23)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/RachelKeysPhotographyStack/PhotosCdn/CorsOriginPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PhotosCdnCorsOriginPolicyF9F466C3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new OriginRequestPolicy2 in aws-cdk-lib...",
+        "new PhotosCdn (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/photos-cdn.ts:42:30)",
+        "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:36:23)",
+        "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
   "/RachelKeysPhotographyStack/PhotosCdn/Distribution/Resource": [
     {
       "type": "aws:cdk:logicalId",
@@ -460,7 +492,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Distribution2 in aws-cdk-lib...",
-        "new PhotosCdn (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/photos-cdn.ts:28:25)",
+        "new PhotosCdn (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/photos-cdn.ts:47:25)",
         "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:36:23)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)",
         "...node internals, ts-node, ts-node..."
@@ -644,7 +676,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Distribution2 in aws-cdk-lib...",
-        "new PhotosCdn (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/photos-cdn.ts:28:25)",
+        "new PhotosCdn (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/photos-cdn.ts:47:25)",
         "new RachelKeysPhotographyStack (/Users/matt/Desktop/RachelKeysPhotography/infra/lib/rachel-keys-photography-stack.ts:36:23)",
         "<anonymous> (/Users/matt/Desktop/RachelKeysPhotography/infra/bin/infra.ts:7:1)"
       ]

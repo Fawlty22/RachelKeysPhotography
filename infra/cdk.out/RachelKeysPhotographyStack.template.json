@@ -51,6 +51,7 @@
         "DELETE"
        ],
        "AllowedOrigins": [
+        "https://rachelkeysphotography.com",
         "https://admin.rachelkeysphotography.com",
         "http://localhost:5173",
         "http://localhost:5174"
@@ -819,7 +820,10 @@
       "EnableAcceptEncodingBrotli": false,
       "EnableAcceptEncodingGzip": false,
       "HeadersConfig": {
-       "HeaderBehavior": "none"
+       "HeaderBehavior": "whitelist",
+       "Headers": [
+        "Origin"
+       ]
       },
       "QueryStringsConfig": {
        "QueryStringBehavior": "none"
@@ -829,6 +833,59 @@
    },
    "Metadata": {
     "aws:cdk:path": "RachelKeysPhotographyStack/PhotosCdn/ShortTtlPolicy/Resource"
+   }
+  },
+  "PhotosCdnPhotosCachePolicy050123F3": {
+   "Type": "AWS::CloudFront::CachePolicy",
+   "Properties": {
+    "CachePolicyConfig": {
+     "DefaultTTL": 86400,
+     "MaxTTL": 31536000,
+     "MinTTL": 0,
+     "Name": "RachelKeys-PhotosWithCors",
+     "ParametersInCacheKeyAndForwardedToOrigin": {
+      "CookiesConfig": {
+       "CookieBehavior": "none"
+      },
+      "EnableAcceptEncodingBrotli": false,
+      "EnableAcceptEncodingGzip": false,
+      "HeadersConfig": {
+       "HeaderBehavior": "whitelist",
+       "Headers": [
+        "Origin"
+       ]
+      },
+      "QueryStringsConfig": {
+       "QueryStringBehavior": "none"
+      }
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/PhotosCdn/PhotosCachePolicy/Resource"
+   }
+  },
+  "PhotosCdnCorsOriginPolicyF9F466C3": {
+   "Type": "AWS::CloudFront::OriginRequestPolicy",
+   "Properties": {
+    "OriginRequestPolicyConfig": {
+     "CookiesConfig": {
+      "CookieBehavior": "none"
+     },
+     "HeadersConfig": {
+      "HeaderBehavior": "whitelist",
+      "Headers": [
+       "Origin"
+      ]
+     },
+     "Name": "RachelKeys-ForwardOrigin",
+     "QueryStringsConfig": {
+      "QueryStringBehavior": "none"
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "RachelKeysPhotographyStack/PhotosCdn/CorsOriginPolicy/Resource"
    }
   },
   "PhotosCdnDistributionOrigin1S3OriginAccessControlBB5D69BB": {
@@ -872,14 +929,22 @@
         "Ref": "PhotosCdnShortTtlPolicyAB394BDF"
        },
        "Compress": true,
+       "OriginRequestPolicyId": {
+        "Ref": "PhotosCdnCorsOriginPolicyF9F466C3"
+       },
        "PathPattern": "content/*",
        "TargetOriginId": "RachelKeysPhotographyStackPhotosCdnDistributionOrigin2E1A18405",
        "ViewerProtocolPolicy": "redirect-to-https"
       }
      ],
      "DefaultCacheBehavior": {
-      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "CachePolicyId": {
+       "Ref": "PhotosCdnPhotosCachePolicy050123F3"
+      },
       "Compress": true,
+      "OriginRequestPolicyId": {
+       "Ref": "PhotosCdnCorsOriginPolicyF9F466C3"
+      },
       "TargetOriginId": "RachelKeysPhotographyStackPhotosCdnDistributionOrigin1D40C1689",
       "ViewerProtocolPolicy": "redirect-to-https"
      },
@@ -1108,7 +1173,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/3VQQW7CQAx8S++LS0PbexouPVRFQT2jZWOCIVlHu94itMrfqySEhENPnhnbo9EkkLwvYfmkL35hivOioj3ErWhzVjl6Ds6g0he/iwad0IGMFqy11SU6iNmkqexgZ7RVfgXxI5gzSre6oWFsuCJzneSBt8pwaUkY4o9Ht2GuupM7HkFWEVqZr27KSNdca7Lzg0n5LNAKyXV0n/OcK0xFtDnWaKVVpuJQHBxbgbgmL472QYit2q6+HZVkU2PQ+4ytuMHtH/nhOdPmiFMDM3ovYEe3VA1zBQ+RSdcQu6Ddbz8nq9HFcRB8W0FMczTsiv60R1sUlWqtB9a2feYgTejr/NJNQ7ZsleUC4eSff5MEXl5h+XTyRAsXrFCNkA/zD/kE8lg5AgAA"
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/3VQwW7CMAz9Fu4hY2XbvSsXDtNQ0c4opKYY0rhLnCEU9d+ntpQWaTv5vWf7yX6JTN4WcjFTFz/XxXlucC/jlpU+ixw8BadBqIvfRQ2O8YBaMVTKqhKcjNmoiexgJ7QRfinje9Bn4LZ1Q33ZkEF9HeWeN0JTaZFJxi8PbkNk2pE7HkBmECxPWzdloCuqFNrpwKisC7CMfB3cpzwnAymz0scKLDdCGwrFwZFlGVfo2eE+MJIV2+WnwxJtqjV4n5Fl17v9Iz8sZ0ofYUxgSvv1HL4D+ElIf8j3rHZ4e6AmMvLhO1SVjO1PrUdXR8vBxVFgeF3KmOagyRXdaIe2wCJVSvWsabpDAtehS/5D1TXashGWCpAn//STJPL5RS5mJ484d8EyViDzvv4CATiSPmQCAAA="
    },
    "Metadata": {
     "aws:cdk:path": "RachelKeysPhotographyStack/CDKMetadata/Default"
