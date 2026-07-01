@@ -1,0 +1,36 @@
+@import 'tailwindcss';
+
+/* Fonts */
+@import '@fontsource-variable/playfair-display/index.css';
+@import '@fontsource-variable/geist/index.css';
+
+@theme {
+  /* Palette — warm off-white, taupe, charcoal */
+  --color-cream: #faf9f7;
+  --color-warm-white: #f5f3ef;
+  --color-taupe: #c9bfb0;
+  --color-taupe-dark: #9e9285;
+  --color-charcoal: #2e2b27;
+  --color-charcoal-light: #4a4642;
+  --color-accent: #b8a898;
+
+  /* Typography */
+  --font-serif: 'Playfair Display Variable', Georgia, serif;
+  --font-sans: 'Geist Variable', system-ui, sans-serif;
+
+  /* Spacing */
+  --section-px: clamp(1.5rem, 5vw, 6rem);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background-color: var(--color-cream);
+    color: var(--color-charcoal);
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+  }
+}
