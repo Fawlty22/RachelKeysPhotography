@@ -50,8 +50,9 @@ export const DEFAULT_CONTENT: SiteContent = {
 export async function fetchContent(): Promise<SiteContent> {
   try {
     const res = await fetch(`${PHOTOS_CDN}/content/site-content.json`, {
-      // Revalidate every 60 s so edits appear promptly without hammering the CDN
-      next: { revalidate: 60 },
+      // force-cache: content is baked into the static HTML at build time.
+      // Updates go live when the automated rebuild pipeline runs after a CMS publish.
+      cache: 'force-cache',
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return (await res.json()) as SiteContent;
@@ -78,7 +79,7 @@ export type PhotoLocation = 'hero' | 'gallery' | 'carousel';
 export async function fetchPhotos(location: PhotoLocation): Promise<PhotoEntry[]> {
   try {
     const res = await fetch(`${PHOTOS_CDN}/content/manifest-${location}.json`, {
-      next: { revalidate: 60 },
+      cache: 'force-cache',
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const keys = (await res.json()) as string[];

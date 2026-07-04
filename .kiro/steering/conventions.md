@@ -7,7 +7,7 @@
 
 ## Project Structure
 - Two sites live in this repo: `portfolio/` (public) and `cms/` (admin hub)
-- The portfolio is being migrated from Vite + React to **Next.js (App Router)** — treat `portfolio/` as a Next.js project
+- The portfolio is a **Next.js (App Router) static site** — `next build` outputs pre-rendered HTML, deployed to S3 + CloudFront
 - The CMS remains a Vite + React SPA (no SSR needed; it's behind auth and not crawled)
 - Shared code/utilities should live in a common package if the project warrants it
 
@@ -18,12 +18,13 @@
 ## SEO (Portfolio Site)
 The portfolio must be fully indexable by search engines. The CMS has no SEO requirements.
 
-- **Framework**: Next.js (App Router) with SSR — do not use client-only rendering for public pages
-- **Metadata**: every page must export `generateMetadata()` with at minimum `title`, `description`, `openGraph` (title, description, image, url), and `twitter` card tags
+- **Framework**: Next.js (App Router) with **static generation** — do not use ISR (`revalidate`), SSR (`dynamic = 'force-dynamic'`), or any server runtime. Pages are pre-rendered at build time.
+- **Data fetching**: fetch CMS content at build time using `cache: 'force-cache'` (or no cache option). Content is baked into the static HTML. Updates go live when the automated rebuild pipeline runs after a CMS publish.
+- **Metadata**: every page must export `generateMetadata()` (or a static `metadata` object) with at minimum `title`, `description`, `openGraph` (title, description, image, url), and `twitter` card tags
 - **Structured data**: include JSON-LD on the home page using `Person` or `LocalBusiness` schema for Rachel's photography business
 - **Canonical URLs**: set `alternates.canonical` in metadata for every page to avoid duplicate-content penalties
 - **Sitemap**: generate via `app/sitemap.ts` (Next.js native); include all public routes
-- **robots.txt**: generate via `app/robots.ts`; allow all crawlers on the portfolio, disallow on the CMS domain
+- **robots.txt**: generate via `app/robots.ts`; allow all crawlers on the portfolio
 - **Image SEO**: all `<Image>` components must have descriptive `alt` text — never empty string for content images
 - **Performance**: Core Web Vitals directly affect search ranking — maintain fast LCP, low CLS, low INP
   - Use `next/image` for all photos (automatic WebP/AVIF conversion, lazy loading, size optimization)
@@ -76,6 +77,23 @@ npx cdk deploy         # deploy to AWS (must be bootstrapped in us-east-1)
 | User Pool ID | `us-east-1_xEoOg1QOx` |
 | Client ID | `4v0vdluscbkqjubd1mcoq64bum` |
 | Hosted UI base URL | `https://rachelkeys-cms.auth.us-east-1.amazoncognito.com` |
+
+## Deployment Pipeline
+The portfolio is deployed as a fully static site. **Do not introduce ISR, OpenNext, SST, or any server runtime.**
+
+**How it works:**
+- The CMS triggers a Lambda (via Function URL or API Gateway) when content is published
+- That Lambda starts an AWS CodeBuild job
+- CodeBuild checks out the repo, runs `npm run build` in `portfolio/`, and uploads the output to S3
+- A CloudFront invalidation clears the CDN cache so the updated site goes live immediately
+
+**Key constraints for the portfolio codebase:**
+- All data fetching must happen at build time — use `cache: 'force-cache'` on fetch calls (or omit the cache option, which defaults to force-cache in Next.js static builds)
+- Never use `next: { revalidate: N }` — ISR requires a server runtime
+- Never use `export const dynamic = 'force-dynamic'` on any page
+- The `next build` output must be fully static (`○` in the build summary, no server functions)
+
+**The pipeline itself (Lambda + CodeBuild) is part of the CDK infra stack in `/infra` and has not yet been implemented.**
 
 ## Git
 - Conventional commit prefixes: `feat:`, `fix:`, `chore:`, `style:`, `docs:`, `infra:`

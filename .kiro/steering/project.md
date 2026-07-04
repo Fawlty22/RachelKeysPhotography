@@ -14,22 +14,45 @@ This project contains **two sites**:
 - Give Rachel full control over content updates without needing code changes or deployments
 
 ## Status
-Infra deployed. CMS is built. Portfolio is built as a React SPA but needs to be migrated to Next.js with SSR for SEO.
+Infra deployed. CMS is built. Portfolio has been migrated from Vite + React SPA to Next.js (App Router) with static generation for SEO.
 
-## SEO Requirements
-The portfolio is a public-facing site that needs to be discoverable by search engines. The current React SPA renders entirely in the browser, which means search engine crawlers see an empty HTML shell — no content is indexable. This must be fixed.
+## SEO
+The portfolio is fully indexable by search engines.
 
-**Planned migration: React → Next.js (App Router, SSR)**
-- Replace the current Vite + React SPA (`portfolio/`) with a Next.js app using server-side rendering
-- Every page must render full HTML on the server so crawlers can index content
-- Implement `<head>` metadata per page: `<title>`, `<meta name="description">`, Open Graph tags (`og:title`, `og:description`, `og:image`), and Twitter card tags
-- Use Next.js `generateMetadata()` for dynamic/per-page metadata
-- Structured data (JSON-LD) should be added for the photographer's business (LocalBusiness or Person schema)
-- Canonical URLs must be set on all pages
-- A `sitemap.xml` should be generated (Next.js supports this natively via `app/sitemap.ts`)
-- A `robots.txt` should allow crawling of the portfolio and block the CMS
+- Built with Next.js App Router using static generation (`next build` outputs pre-rendered HTML)
+- Every page renders full HTML at build time — crawlers see real content on first load
+- `<head>` metadata on every page: `<title>`, `<meta name="description">`, Open Graph tags, Twitter card tags
+- Structured data (JSON-LD) with `LocalBusiness` + `Person` schema on the home page
+- Canonical URLs set on all pages via `alternates.canonical` in metadata exports
+- `sitemap.xml` generated via `app/sitemap.ts`
+- `robots.txt` generated via `app/robots.ts`
 
-**Infrastructure note**: Migrating to Next.js with SSR means the portfolio can no longer be hosted as a static site on S3 + CloudFront alone. A server runtime is required (e.g., AWS Lambda via OpenNext/SST, or a container). The infra stack will need to be updated as part of this migration.
+## Deployment Architecture
+**Decision: fully static Next.js deployed to S3 + CloudFront, with automated rebuilds triggered by CMS publish actions.**
+
+Do not use ISR, OpenNext, SST, or any server runtime for the portfolio. The site is pre-rendered at build time and served as static files.
+
+**Automated rebuild pipeline (to be implemented):**
+```
+CMS Publish
+    ↓
+Trigger Lambda (Function URL or API Gateway)
+    ↓
+AWS CodeBuild
+    ↓
+npm run build (next build → static output)
+    ↓
+Upload static output to S3
+    ↓
+CloudFront invalidation
+```
+
+**Rationale:**
+- Content updates are infrequent (new galleries, pricing edits, about page changes) — build time is an acceptable tradeoff
+- Fully static hosting on S3 + CloudFront is simpler, cheaper, and already deployed
+- No server runtime to manage, secure, or pay for
+- Deployment stays entirely within AWS using IAM roles — no external CI/CD credentials needed
+- Rachel never performs manual deployments; publishing in the CMS automatically triggers a rebuild
 
 ## Infrastructure (AWS)
 - **Deployment**: S3 + CloudFront (deployed)
