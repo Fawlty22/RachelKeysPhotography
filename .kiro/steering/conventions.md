@@ -7,11 +7,28 @@
 
 ## Project Structure
 - Two sites live in this repo: `portfolio/` (public) and `cms/` (admin hub)
+- The portfolio is being migrated from Vite + React to **Next.js (App Router)** — treat `portfolio/` as a Next.js project
+- The CMS remains a Vite + React SPA (no SSR needed; it's behind auth and not crawled)
 - Shared code/utilities should live in a common package if the project warrants it
 
 ## Code Style
 - Consistent formatting enforced by the project's linter/formatter (TBD when stack is chosen)
 - Component/file names: TBD based on chosen framework conventions
+
+## SEO (Portfolio Site)
+The portfolio must be fully indexable by search engines. The CMS has no SEO requirements.
+
+- **Framework**: Next.js (App Router) with SSR — do not use client-only rendering for public pages
+- **Metadata**: every page must export `generateMetadata()` with at minimum `title`, `description`, `openGraph` (title, description, image, url), and `twitter` card tags
+- **Structured data**: include JSON-LD on the home page using `Person` or `LocalBusiness` schema for Rachel's photography business
+- **Canonical URLs**: set `alternates.canonical` in metadata for every page to avoid duplicate-content penalties
+- **Sitemap**: generate via `app/sitemap.ts` (Next.js native); include all public routes
+- **robots.txt**: generate via `app/robots.ts`; allow all crawlers on the portfolio, disallow on the CMS domain
+- **Image SEO**: all `<Image>` components must have descriptive `alt` text — never empty string for content images
+- **Performance**: Core Web Vitals directly affect search ranking — maintain fast LCP, low CLS, low INP
+  - Use `next/image` for all photos (automatic WebP/AVIF conversion, lazy loading, size optimization)
+  - Avoid layout shift: always provide `width`/`height` or use `fill` with a sized container
+- **Heading hierarchy**: each page should have exactly one `<h1>`; use `<h2>`/`<h3>` for subsections
 
 ## Images & Assets
 - Never commit full-resolution source photos to git — store in S3

@@ -14,7 +14,22 @@ This project contains **two sites**:
 - Give Rachel full control over content updates without needing code changes or deployments
 
 ## Status
-Infra deployed. CMS app is next, then portfolio.
+Infra deployed. CMS is built. Portfolio is built as a React SPA but needs to be migrated to Next.js with SSR for SEO.
+
+## SEO Requirements
+The portfolio is a public-facing site that needs to be discoverable by search engines. The current React SPA renders entirely in the browser, which means search engine crawlers see an empty HTML shell — no content is indexable. This must be fixed.
+
+**Planned migration: React → Next.js (App Router, SSR)**
+- Replace the current Vite + React SPA (`portfolio/`) with a Next.js app using server-side rendering
+- Every page must render full HTML on the server so crawlers can index content
+- Implement `<head>` metadata per page: `<title>`, `<meta name="description">`, Open Graph tags (`og:title`, `og:description`, `og:image`), and Twitter card tags
+- Use Next.js `generateMetadata()` for dynamic/per-page metadata
+- Structured data (JSON-LD) should be added for the photographer's business (LocalBusiness or Person schema)
+- Canonical URLs must be set on all pages
+- A `sitemap.xml` should be generated (Next.js supports this natively via `app/sitemap.ts`)
+- A `robots.txt` should allow crawling of the portfolio and block the CMS
+
+**Infrastructure note**: Migrating to Next.js with SSR means the portfolio can no longer be hosted as a static site on S3 + CloudFront alone. A server runtime is required (e.g., AWS Lambda via OpenNext/SST, or a container). The infra stack will need to be updated as part of this migration.
 
 ## Infrastructure (AWS)
 - **Deployment**: S3 + CloudFront (deployed)
