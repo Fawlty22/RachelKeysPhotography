@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { PhotoEntry } from '@/lib/content';
 
 interface TestimonialProps {
@@ -13,7 +14,7 @@ const TESTIMONIAL = {
 
 export function Testimonial({ photos }: TestimonialProps) {
   // Use a gallery photo as the background if available
-  const bg = photos[1]?.url ?? photos[0]?.url;
+  const bg = photos[1] ?? photos[0];
 
   return (
     <section
@@ -24,12 +25,13 @@ export function Testimonial({ photos }: TestimonialProps) {
       {/* Background photo with heavy overlay for legibility */}
       <div className="absolute inset-0 bg-[var(--color-charcoal)]">
         {bg && (
-          <img
-            src={bg}
+          <Image
+            src={bg.url}
             alt=""
             aria-hidden="true"
-            className="h-full w-full object-cover opacity-40"
-            loading="lazy"
+            fill
+            className="object-cover opacity-40"
+            sizes="100vw"
           />
         )}
         <div className="absolute inset-0 bg-[var(--color-taupe)]/30" />

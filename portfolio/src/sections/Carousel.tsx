@@ -1,4 +1,7 @@
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import type { PhotoEntry } from '@/lib/content';
 import { cn } from '@/lib/utils';
 
@@ -16,11 +19,18 @@ export function Carousel({ photos }: CarouselProps) {
     setCurrent((index + count) % count);
   }
 
+  function resetTimer() {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => setCurrent((c) => (c + 1) % count), 5000);
+  }
+
   // Auto-advance every 5 seconds
   useEffect(() => {
     if (count < 2) return;
-    timerRef.current = setInterval(() => setCurrent(c => (c + 1) % count), 5000);
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+    timerRef.current = setInterval(() => setCurrent((c) => (c + 1) % count), 5000);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
   }, [count]);
 
   if (count === 0) return null;
@@ -42,11 +52,13 @@ export function Carousel({ photos }: CarouselProps) {
             )}
             aria-hidden={i !== current}
           >
-            <img
+            <Image
               src={photo.url}
               alt={`Portfolio photo ${i + 1}`}
-              className="h-full w-full object-cover"
-              loading={i === 0 ? 'eager' : 'lazy'}
+              fill
+              className="object-cover"
+              priority={i === 0}
+              sizes="100vw"
             />
             {/* Subtle vignette */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
@@ -66,12 +78,7 @@ export function Carousel({ photos }: CarouselProps) {
                 role="tab"
                 aria-selected={i === current}
                 aria-label={`Go to slide ${i + 1}`}
-                onClick={() => {
-                  goTo(i);
-                  // Reset auto-advance timer on manual interaction
-                  if (timerRef.current) clearInterval(timerRef.current);
-                  timerRef.current = setInterval(() => setCurrent(c => (c + 1) % count), 5000);
-                }}
+                onClick={() => { goTo(i); resetTimer(); }}
                 className={cn(
                   'h-1.5 rounded-full transition-all duration-300',
                   i === current ? 'w-6 bg-white' : 'w-1.5 bg-white/40 hover:bg-white/60',
@@ -85,14 +92,14 @@ export function Carousel({ photos }: CarouselProps) {
         {count > 1 && (
           <>
             <button
-              onClick={() => goTo(current - 1)}
+              onClick={() => { goTo(current - 1); resetTimer(); }}
               className="absolute left-4 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur-sm transition hover:bg-black/50"
               aria-label="Previous photo"
             >
               ‹
             </button>
             <button
-              onClick={() => goTo(current + 1)}
+              onClick={() => { goTo(current + 1); resetTimer(); }}
               className="absolute right-4 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur-sm transition hover:bg-black/50"
               aria-label="Next photo"
             >

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { SiteContent, PhotoEntry } from '@/lib/content';
 
 interface AboutProps {
@@ -6,7 +7,7 @@ interface AboutProps {
 }
 
 export function About({ content, photos }: AboutProps) {
-  const portrait = photos[0]?.url;
+  const portrait = photos[0];
   const paragraphs = content.body.split('\n\n').filter(Boolean);
 
   return (
@@ -19,7 +20,7 @@ export function About({ content, photos }: AboutProps) {
         {/* Text */}
         <div>
           <p className="font-serif italic text-[var(--color-taupe-dark)] text-lg mb-2">
-            hey there, I'm Rachel
+            hey there, I&apos;m Rachel
           </p>
           <h2 className="font-serif text-3xl sm:text-4xl font-normal uppercase tracking-wide text-[var(--color-charcoal)] leading-tight mb-6">
             The Heart Behind<br />the Lens
@@ -40,15 +41,14 @@ export function About({ content, photos }: AboutProps) {
         </div>
 
         {/* Portrait */}
-        <div className="aspect-[3/4] overflow-hidden bg-[var(--color-warm-white)]">
+        <div className="relative aspect-[3/4] overflow-hidden bg-[var(--color-warm-white)]">
           {portrait ? (
-            <img
-              src={portrait}
+            <Image
+              src={portrait.url}
               alt="Portrait of Rachel Keys"
-              className="h-full w-full object-cover"
-              width={600}
-              height={800}
-              loading="lazy"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           ) : (
             <div className="h-full w-full bg-[var(--color-warm-white)]" aria-hidden="true" />

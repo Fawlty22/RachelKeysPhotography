@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { SiteContent, PhotoEntry } from '@/lib/content';
 
 interface HeroProps {
@@ -6,7 +7,7 @@ interface HeroProps {
 }
 
 export function Hero({ content, photos }: HeroProps) {
-  const bg = photos[0]?.url;
+  const bg = photos[0];
 
   // Split headline to allow italic styling on the last line
   const lines = content.headline.split('\n');
@@ -22,12 +23,14 @@ export function Hero({ content, photos }: HeroProps) {
       {/* Background image */}
       <div className="absolute inset-0 bg-[var(--color-charcoal)]">
         {bg && (
-          <img
-            src={bg}
+          <Image
+            src={bg.url}
             alt="Rachel Keys Photography — hero"
-            className="h-full w-full object-cover"
+            fill
+            className="object-cover"
             style={{ opacity: 0.85 }}
-            fetchPriority="high"
+            priority
+            sizes="100vw"
           />
         )}
         {/* Gradient overlay — darkens the bottom-left where text sits */}

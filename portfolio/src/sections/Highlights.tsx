@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { PhotoEntry } from '@/lib/content';
 
 interface HighlightsProps {
@@ -36,16 +37,15 @@ export function Highlights({ photos }: HighlightsProps) {
             {strip.map((photo, i) => (
               <div
                 key={photo.key}
-                className="aspect-[2/3] overflow-hidden bg-[var(--color-taupe)]/20"
+                className="relative aspect-[2/3] overflow-hidden bg-[var(--color-taupe)]/20"
                 role="listitem"
               >
-                <img
+                <Image
                   src={photo.url}
-                  alt={`Recent highlight ${i + 1}`}
-                  className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-                  loading="lazy"
-                  width={400}
-                  height={600}
+                  alt={`Recent highlight photo ${i + 1}`}
+                  fill
+                  className="object-cover transition-transform duration-500 hover:scale-105"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
                 />
               </div>
             ))}
