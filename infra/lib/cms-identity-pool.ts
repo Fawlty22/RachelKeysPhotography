@@ -56,6 +56,17 @@ export class CmsIdentityPool extends Construct {
       }),
     );
 
+    // Allow the CMS to poll CodeBuild build status so it can show
+    // live deploy progress after triggering a rebuild.
+    this.identityPool.authenticatedRole.addToPrincipalPolicy(
+      new iam.PolicyStatement({
+        effect: iam.Effect.ALLOW,
+        actions: ['codebuild:BatchGetBuilds'],
+        // CodeBuild doesn't support resource-level restrictions on BatchGetBuilds
+        resources: ['*'],
+      }),
+    );
+
     new cdk.CfnOutput(this, 'IdentityPoolId', {
       value: this.identityPool.identityPoolId,
       exportName: 'CmsIdentityPoolId',

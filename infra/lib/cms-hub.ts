@@ -32,9 +32,18 @@ export class CmsHub extends Construct {
       defaultRootObject: 'index.html',
       errorResponses: [
         {
+          // S3 + OAC returns 403 for missing objects — map to index.html so
+          // deep-link refreshes work (e.g. refreshing /content, /photos, etc.)
+          httpStatus: 403,
+          responseHttpStatus: 200,
+          responsePagePath: '/index.html',
+          ttl: cdk.Duration.seconds(0),
+        },
+        {
           httpStatus: 404,
           responseHttpStatus: 200,
           responsePagePath: '/index.html',
+          ttl: cdk.Duration.seconds(0),
         },
       ],
       ...(props.certificate && {

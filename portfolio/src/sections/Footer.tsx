@@ -1,3 +1,5 @@
+import Image from 'next/image';
+import rachelKeysLogo from '@/assets/rachel_keys_logo.PNG';
 import type { SiteContent } from '@/lib/content';
 
 interface FooterProps {
@@ -10,7 +12,7 @@ export function Footer({ content }: FooterProps) {
       {/* Contact CTA strip */}
       <section
         id="contact"
-        className="bg-[var(--color-cream)] py-20 px-6 lg:px-12"
+        className="bg-[#f8f3ef] py-20 px-6 lg:px-12"
         aria-label="Contact"
       >
         <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
@@ -30,20 +32,13 @@ export function Footer({ content }: FooterProps) {
             </a>
           </div>
 
-          {/* Center — monogram */}
-          <div className="flex flex-col items-center justify-center text-center">
-            <div
-              className="font-serif text-4xl font-normal text-[var(--color-charcoal)] tracking-widest select-none"
-              aria-label="RK monogram"
-            >
-              R &nbsp;|&nbsp; K
-            </div>
-            <div
-              className="mt-1 text-xs text-[var(--color-taupe-dark)] tracking-widest font-serif italic"
-              aria-hidden="true"
-            >
-              ✦
-            </div>
+          {/* Center — logo */}
+          <div className="flex items-center justify-center">
+            <Image
+              src={rachelKeysLogo}
+              alt="Rachel Keys Photography logo"
+              className="w-40 h-auto"
+            />
           </div>
 
           {/* Right — contact details */}
@@ -81,7 +76,7 @@ export function Footer({ content }: FooterProps) {
       </section>
 
       {/* Footer bar */}
-      <footer className="bg-[var(--color-warm-white)] border-t border-[var(--color-taupe)]/30 py-5 px-6 text-center">
+      <footer className="bg-[#f8f3ef] border-t border-[var(--color-taupe)]/30 py-5 px-6 text-center">
         <p className="text-xs text-[var(--color-taupe-dark)] tracking-widest uppercase">
           © {new Date().getFullYear()} Rachel Keys Photography&nbsp;|&nbsp;All Rights Reserved
         </p>

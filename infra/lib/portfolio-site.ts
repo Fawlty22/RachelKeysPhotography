@@ -30,9 +30,20 @@ export class PortfolioSite extends Construct {
       defaultRootObject: 'index.html',
       errorResponses: [
         {
+          // Next.js static export generates a real 404.html.
+          // Return it with a proper 404 status so search engines don't index
+          // 404 pages as valid content (the old SPA used 200 here).
           httpStatus: 404,
-          responseHttpStatus: 200,
-          responsePagePath: '/index.html',
+          responseHttpStatus: 404,
+          responsePagePath: '/404.html',
+          ttl: cdk.Duration.seconds(10),
+        },
+        {
+          // S3 returns 403 for missing objects when using OAC — also map to 404.
+          httpStatus: 403,
+          responseHttpStatus: 404,
+          responsePagePath: '/404.html',
+          ttl: cdk.Duration.seconds(10),
         },
       ],
       ...(props.certificate && {

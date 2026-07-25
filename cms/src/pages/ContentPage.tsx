@@ -5,26 +5,32 @@ import { DEFAULT_CONTENT, getContent, saveContent, type SiteContent } from '@/li
 export function ContentPage() {
   const [content, setContent] = useState<SiteContent>(DEFAULT_CONTENT);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   useEffect(() => {
     getContent()
       .then(setContent)
-      .catch(e => setError((e as Error).message))
+      .catch(e => {
+        console.error('Failed to load content from S3:', e);
+        setLoadError((e as Error).message ?? 'Unknown error');
+        // Keep DEFAULT_CONTENT in state so the form is still usable
+      })
       .finally(() => setLoading(false));
   }, []);
 
   async function handleSave() {
     setSaving(true);
     setSaved(false);
-    setError(null);
+    setSaveError(null);
     try {
       await saveContent(content);
       setSaved(true);
+      setLoadError(null);
     } catch (e) {
-      setError((e as Error).message);
+      setSaveError((e as Error).message);
     } finally {
       setSaving(false);
     }
@@ -45,12 +51,19 @@ export function ContentPage() {
         <h1 className="text-2xl font-semibold">Content</h1>
         <div className="flex items-center gap-3">
           {saved && <span className="text-sm text-green-600">Saved</span>}
-          {error && <span className="text-sm text-destructive">{error}</span>}
+          {saveError && <span className="text-sm text-destructive">{saveError}</span>}
           <Button onClick={handleSave} disabled={saving}>
             {saving ? 'Saving…' : 'Save changes'}
           </Button>
         </div>
       </div>
+
+      {loadError && (
+        <div className="rounded-md border border-destructive/40 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+          <strong>Could not load saved content.</strong> Showing defaults — check the browser
+          console for details. Any saves here will overwrite the current S3 content.
+        </div>
+      )}
 
       <Section title="Hero">
         <Field label="Headline" value={content.hero.headline}
@@ -75,14 +88,19 @@ export function ContentPage() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="space-y-4">
-      <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">{title}</h2>
+      <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+        {title}
+      </h2>
       <div className="space-y-3">{children}</div>
     </div>
   );
 }
 
 function Field({ label, value, onChange, multiline }: {
-  label: string; value: string; onChange: (v: string) => void; multiline?: boolean;
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  multiline?: boolean;
 }) {
   const base = 'w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring';
   return (

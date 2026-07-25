@@ -107,6 +107,7 @@ async function refreshManifest(client: S3Client, location: PhotoLocation): Promi
       Key: `content/manifest-${location}.json`,
       Body: new TextEncoder().encode(JSON.stringify(keys)),
       ContentType: 'application/json',
+      CacheControl: 'no-cache',
     }),
   );
 }
@@ -127,13 +128,9 @@ export const DEFAULT_CONTENT: SiteContent = {
 
 export async function getContent(): Promise<SiteContent> {
   const client = getS3Client();
-  try {
-    const result = await client.send(new GetObjectCommand({ Bucket: BUCKET, Key: CONTENT_KEY }));
-    const text = await result.Body!.transformToString();
-    return JSON.parse(text) as SiteContent;
-  } catch {
-    return DEFAULT_CONTENT;
-  }
+  const result = await client.send(new GetObjectCommand({ Bucket: BUCKET, Key: CONTENT_KEY }));
+  const text = await result.Body!.transformToString();
+  return JSON.parse(text) as SiteContent;
 }
 
 export async function saveContent(content: SiteContent): Promise<void> {
@@ -143,5 +140,8 @@ export async function saveContent(content: SiteContent): Promise<void> {
     Key: CONTENT_KEY,
     Body: new TextEncoder().encode(JSON.stringify(content, null, 2)),
     ContentType: 'application/json',
+    // Prevent browsers and CloudFront from caching content JSON so edits
+    // are visible immediately after saving without requiring a hard refresh.
+    CacheControl: 'no-cache',
   }));
 }
