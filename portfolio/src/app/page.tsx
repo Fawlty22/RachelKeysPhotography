@@ -14,20 +14,23 @@ import { Footer } from '@/sections/Footer';
 export default async function HomePage() {
   // Fetch all data in parallel — each call falls back gracefully if the CDN
   // file doesn't exist yet (CMS not yet populated).
-  const [content, heroPhotos, galleryPhotos] = await Promise.all([
+  const [content, heroPhotos, heroPortraitPhotos, galleryPhotos, testimonialPhotos, testimonialPortraitPhotos] = await Promise.all([
     fetchContent(),
     fetchPhotos('hero'),
+    fetchPhotos('hero-portrait'),
     fetchPhotos('gallery'),
+    fetchPhotos('testimonial'),
+    fetchPhotos('testimonial-portrait'),
   ]);
 
   return (
     <>
       <Nav />
       <main>
-        <Hero content={content.hero} photos={heroPhotos} />
+        <Hero content={content.hero} photos={heroPhotos} portraitPhotos={heroPortraitPhotos} />
         <About content={content.about} photos={galleryPhotos} />
         <Highlights photos={galleryPhotos} />
-        <Testimonial photos={galleryPhotos} />
+        <Testimonial photos={testimonialPhotos} portraitPhotos={testimonialPortraitPhotos} />
       </main>
       <Footer content={content.contact} />
     </>

@@ -12,10 +12,10 @@ export function Footer({ content }: FooterProps) {
       {/* Contact CTA strip */}
       <section
         id="contact"
-        className="bg-[#f8f3ef] py-20 px-6 lg:px-12"
+        className="bg-[#f8f3ef] py-16 md:py-20 px-6 lg:px-12"
         aria-label="Contact"
       >
-        <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+        <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 items-start">
           {/* Left — CTA */}
           <div>
             <h2 className="font-serif text-xl font-normal uppercase tracking-widest text-[var(--color-charcoal)] mb-3">
@@ -26,7 +26,7 @@ export function Footer({ content }: FooterProps) {
             </p>
             <a
               href="mailto:rachelkeysphotography@gmail.com"
-              className="inline-block border border-[var(--color-charcoal)] px-7 py-3 text-xs font-medium tracking-widest uppercase text-[var(--color-charcoal)] transition hover:bg-[var(--color-charcoal)] hover:text-white"
+              className="inline-block border border-[var(--color-charcoal)] px-7 py-3.5 text-xs font-medium tracking-widest uppercase text-[var(--color-charcoal)] transition hover:bg-[var(--color-charcoal)] hover:text-white"
             >
               Inquire Here
             </a>

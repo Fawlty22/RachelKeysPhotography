@@ -8,7 +8,8 @@
  *   content/site-content.json       — editable copy (hero, about, contact)
  *   content/manifest-hero.json      — array of S3 keys for hero photos
  *   content/manifest-gallery.json   — array of S3 keys for gallery photos
- *   content/manifest-carousel.json  — array of S3 keys for carousel photos
+ *   content/manifest-testimonial.json        — array of S3 keys for testimonial photos
+ *   content/manifest-testimonial-portrait.json — array of S3 keys for testimonial portrait photos
  */
 
 export const PHOTOS_CDN = 'https://photos.rachelkeysphotography.com';
@@ -70,7 +71,7 @@ export interface PhotoEntry {
   url: string;
 }
 
-export type PhotoLocation = 'hero' | 'gallery' | 'carousel';
+export type PhotoLocation = 'hero' | 'hero-portrait' | 'gallery' | 'testimonial' | 'testimonial-portrait';
 
 /**
  * Fetch a photo manifest from the CDN. Safe to call in React Server Components.

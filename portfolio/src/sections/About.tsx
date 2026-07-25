@@ -13,10 +13,10 @@ export function About({ content, photos }: AboutProps) {
   return (
     <section
       id="about"
-      className="bg-[var(--color-cream)] py-24 px-6 lg:px-12"
+      className="bg-[var(--color-cream)] py-16 md:py-24 px-6 lg:px-12"
       aria-label="About Rachel"
     >
-      <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-20 items-center">
         {/* Text */}
         <div>
           <p className="font-serif italic text-[var(--color-taupe-dark)] text-lg mb-2">
@@ -34,7 +34,7 @@ export function About({ content, photos }: AboutProps) {
           </div>
           <a
             href="#contact"
-            className="mt-8 inline-block border border-[var(--color-charcoal)] px-7 py-3 text-xs font-medium tracking-widest uppercase text-[var(--color-charcoal)] transition hover:bg-[var(--color-charcoal)] hover:text-white"
+            className="mt-8 inline-block border border-[var(--color-charcoal)] px-7 py-3.5 text-xs font-medium tracking-widest uppercase text-[var(--color-charcoal)] transition hover:bg-[var(--color-charcoal)] hover:text-white"
           >
             Learn More About Me
           </a>

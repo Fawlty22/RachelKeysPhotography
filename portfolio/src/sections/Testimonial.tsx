@@ -3,6 +3,7 @@ import type { PhotoEntry } from '@/lib/content';
 
 interface TestimonialProps {
   photos: PhotoEntry[];
+  portraitPhotos: PhotoEntry[];
 }
 
 // Static testimonial for now — can be moved to site-content.json later
@@ -12,24 +13,38 @@ const TESTIMONIAL = {
   attribution: '— Noel & Taylor',
 };
 
-export function Testimonial({ photos }: TestimonialProps) {
-  // Use a gallery photo as the background if available
-  const bg = photos[1] ?? photos[0];
+export function Testimonial({ photos, portraitPhotos }: TestimonialProps) {
+  // Dedicated landscape photo for desktop; dedicated portrait photo for mobile.
+  // If either slot is empty the section still renders — just no background image.
+  const landscape = photos[0];
+  const portrait = portraitPhotos[0] ?? landscape;
 
   return (
     <section
-      className="relative py-28 px-6 lg:px-12 overflow-hidden"
+      className="relative py-20 md:py-28 px-6 lg:px-12 overflow-hidden"
       aria-label="Client testimonial"
     >
-      {/* Background photo with heavy overlay for legibility */}
+      {/* Background photo — two variants swapped at the md breakpoint */}
       <div className="absolute inset-0 bg-[var(--color-charcoal)]">
-        {bg && (
+        {/* Landscape: hidden on mobile, shown on md+ */}
+        {landscape && (
           <Image
-            src={bg.url}
+            src={landscape.url}
             alt=""
             aria-hidden="true"
             fill
-            className="object-cover opacity-40"
+            className="object-cover opacity-40 hidden md:block"
+            sizes="100vw"
+          />
+        )}
+        {/* Portrait: shown on mobile, hidden on md+ */}
+        {portrait && (
+          <Image
+            src={portrait.url}
+            alt=""
+            aria-hidden="true"
+            fill
+            className="object-cover opacity-40 block md:hidden"
             sizes="100vw"
           />
         )}
@@ -46,7 +61,7 @@ export function Testimonial({ photos }: TestimonialProps) {
         </span>
 
         <blockquote>
-          <p className="font-serif text-xl sm:text-2xl text-white font-normal leading-relaxed italic">
+          <p className="font-serif text-lg sm:text-2xl text-white font-normal leading-relaxed italic">
             {TESTIMONIAL.quote}
           </p>
           <footer className="mt-6 text-xs tracking-widest uppercase text-white/70">
