@@ -7,7 +7,7 @@ const BUCKET = 'rachelkeysphotographystack-photosbucket0a0467f9-fvaw0fcrd6ih';
 const IDENTITY_POOL_ID = import.meta.env.VITE_IDENTITY_POOL_ID as string;
 const USER_POOL_ID = 'us-east-1_xEoOg1QOx';
 
-export const LOCATIONS = ['hero', 'hero-portrait', 'gallery', 'testimonial', 'testimonial-portrait'] as const;
+export const LOCATIONS = ['hero', 'hero-portrait', 'gallery', 'about', 'testimonial', 'testimonial-portrait'] as const;
 export type PhotoLocation = (typeof LOCATIONS)[number];
 
 export interface PhotoObject {

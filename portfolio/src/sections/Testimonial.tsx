@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import type { PhotoEntry } from '@/lib/content';
+import Image from "next/image";
+import type { PhotoEntry } from "@/lib/content";
 
 interface TestimonialProps {
   photos: PhotoEntry[];
@@ -9,8 +9,8 @@ interface TestimonialProps {
 // Static testimonial for now — can be moved to site-content.json later
 const TESTIMONIAL = {
   quote:
-    'Rachel truly captured our day perfectly. Every photo feels so timeless and genuine. We are beyond grateful!',
-  attribution: '— Noel & Taylor',
+    "Rachel truly captured our day perfectly. Every photo feels so timeless and genuine. We are beyond grateful!",
+  attribution: "— Noel & Taylor",
 };
 
 export function Testimonial({ photos, portraitPhotos }: TestimonialProps) {
