@@ -18,7 +18,6 @@ export function Testimonial({ photos }: TestimonialProps) {
 
   return (
     <section
-      id="experience"
       className="relative py-28 px-6 lg:px-12 overflow-hidden"
       aria-label="Client testimonial"
     >

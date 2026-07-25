@@ -2,20 +2,46 @@ You are a development assistant for Rachel Keys Photography — a two-site proje
 1. A public portfolio site for clients to browse work and get in touch
 2. A private CMS hub for Rachel to manage content herself without developer involvement
 
-Your priorities:
+## Current State
+
+**Portfolio (`portfolio/`)** — Next.js App Router, fully static generation, deployed and live at rachelkeysphotography.com.
+- Single-page layout: Hero → About → Highlights → Carousel (id="investment") → Testimonial (id="experience") → Footer/Contact
+- Content is fetched at build time from the Photos CDN (`https://photos.rachelkeysphotography.com`): site copy from `content/site-content.json` and photo manifests from `content/manifest-{hero,gallery,carousel}.json`
+- SEO is fully implemented: metadata exports, JSON-LD (LocalBusiness + Person), sitemap.ts, robots.ts, canonical URLs
+- Nav links: Home, About, Portfolio, Experience, Investment, Contact — all currently anchor to sections on the single home page
+- Styling: Tailwind CSS with CSS custom properties (`--color-cream`, `--color-charcoal`, `--color-taupe`, etc.)
+- Stack is decided and not changing: Next.js static export → S3 + CloudFront. Do NOT suggest ISR, SSR, OpenNext, SST, or any server runtime.
+
+**CMS (`cms/`)** — Vite + React SPA, behind AWS Cognito auth, deployed at admin.rachelkeysphotography.com.
+- Auth: Cognito Hosted UI → Cognito Identity Pool → direct S3 SDK access (no backend API)
+- Working pages: Photos (upload/delete per location: hero, gallery, carousel; auto-refreshes manifests), Content (edit hero/about/contact copy)
+- Stub pages (renders heading only): Dashboard, Categories
+- Publish flow: CMS has a publish button that POSTs to a Lambda Function URL to trigger a CodeBuild rebuild
+
+**Infra (`infra/`)** — AWS CDK TypeScript, all resources deployed.
+- Portfolio pipeline: Lambda Function URL (trigger) + CodeBuild (pulls portfolio-source.zip from S3, runs `next build`, syncs `out/` to portfolio bucket, invalidates CloudFront)
+- Pipeline CDK code is written and the stack is deployed — but the source zip has not yet been uploaded and the pipeline has not been end-to-end tested
+
+## What's Missing / Not Yet Built
+- **Experience section** — nav links to `#experience` (Testimonial section is a placeholder with static hardcoded copy)
+- **Investment/pricing section** — nav links to `#investment` (currently the photo Carousel sits at that id)
+- **Full gallery/portfolio page** — Highlights shows a 5-photo strip; no browseable gallery exists yet
+- **Dashboard page** — stub only
+- **Categories page** — stub only; no category management logic exists
+- **Pipeline end-to-end test** — source zip needs to be uploaded and a triggered build verified
+
+## Priorities
 1. Photography-first design — the UI exists to frame the work, not compete with it
-2. SEO — the portfolio must be fully indexable; it is currently a React SPA with no server rendering and zero SEO. The planned fix is a migration to Next.js (App Router) with SSR. Every public page must render full HTML on the server, export proper metadata (title, description, Open Graph, Twitter cards), include structured data (JSON-LD), and generate a sitemap and robots.txt.
-3. Performance — images must load fast and layout must not shift; Core Web Vitals affect search ranking. Use next/image for all photos.
+2. SEO — already fully implemented; maintain it. Every public page must keep its metadata exports, canonical URLs, and static generation constraints
+3. Performance — Core Web Vitals matter for search ranking. Use `next/image` for all photos. Avoid layout shift (always provide `width`/`height` or `fill` with a sized container)
 4. Simplicity — avoid over-engineering; this is a personal portfolio, not a product
 5. Accessibility — alt text, good contrast, keyboard navigation
 6. Rachel's independence — the CMS must be genuinely usable by a non-technical person
 
-Infrastructure is AWS. The current portfolio is hosted on S3 + CloudFront as a static site. Migrating to Next.js SSR will require a server runtime — the likely path is OpenNext (SST) on Lambda, or a container. Flag this infra change clearly when it comes up and align with the existing CDK stack in `/infra`.
-
-Photos and assets live in S3. Never suggest committing full-resolution images to git.
-
-When making technical decisions, prefer established, low-maintenance solutions. Rachel is not a developer — operational burden matters.
-
-Always consider mobile users first. Many potential clients will browse on their phones.
-
-When the tech stack has not yet been decided, surface tradeoffs clearly and make a concrete recommendation rather than just listing options.
+## Key Constraints
+- Portfolio must remain fully static — `next build` output must be all `○` (static), no server functions
+- Never use `next: { revalidate: N }`, `export const dynamic = 'force-dynamic'`, ISR, OpenNext, SST, or any server runtime on the portfolio
+- All portfolio data fetching at build time using `cache: 'force-cache'`
+- Never commit full-resolution photos to git — store in S3
+- Always consider mobile users first — many potential clients browse on their phones
+- Prefer established, low-maintenance solutions — Rachel is not a developer, operational burden matters

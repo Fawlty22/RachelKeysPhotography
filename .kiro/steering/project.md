@@ -16,6 +16,21 @@ This project contains **two sites**:
 ## Status
 Infra deployed. CMS is built. Portfolio has been migrated from Vite + React SPA to Next.js (App Router) with static generation for SEO.
 
+**What's built and live:**
+- Portfolio: Next.js static site deployed to S3 + CloudFront at rachelkeysphotography.com
+- CMS: Vite + React SPA deployed at admin.rachelkeysphotography.com — Photos and Content pages are fully functional
+- Build pipeline: Lambda + CodeBuild CDK constructs are written and deployed to AWS
+
+**What's a stub (exists but not implemented):**
+- CMS Dashboard page — renders a heading only
+- CMS Categories page — renders a heading only; no category management logic
+
+**What's missing / not yet built:**
+- Portfolio Experience section — nav links to `#experience` but the Testimonial section there has only static hardcoded copy
+- Portfolio Investment/pricing section — nav links to `#investment` but the photo Carousel currently occupies that id
+- Full browseable gallery/portfolio page — only a 5-photo Highlights strip exists
+- Pipeline end-to-end test — the source zip has not been uploaded to the source bucket; the triggered rebuild flow has not been verified
+
 ## SEO
 The portfolio is fully indexable by search engines.
 

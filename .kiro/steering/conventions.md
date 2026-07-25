@@ -93,7 +93,7 @@ The portfolio is deployed as a fully static site. **Do not introduce ISR, OpenNe
 - Never use `export const dynamic = 'force-dynamic'` on any page
 - The `next build` output must be fully static (`○` in the build summary, no server functions)
 
-**The pipeline itself (Lambda + CodeBuild) is part of the CDK infra stack in `/infra` and has not yet been implemented.**
+**The pipeline itself (Lambda + CodeBuild) is part of the CDK infra stack in `/infra` and has been implemented and deployed — but the source zip has not yet been uploaded to the source bucket and the end-to-end flow has not been verified.**
 
 ## Git
 - Conventional commit prefixes: `feat:`, `fix:`, `chore:`, `style:`, `docs:`, `infra:`

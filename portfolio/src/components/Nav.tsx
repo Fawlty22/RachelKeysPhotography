@@ -7,8 +7,6 @@ const LINKS = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
   { label: 'Portfolio', href: '#highlights' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Investment', href: '#investment' },
   { label: 'Contact', href: '#contact' },
 ];
 
