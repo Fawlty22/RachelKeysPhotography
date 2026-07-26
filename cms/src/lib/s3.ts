@@ -145,3 +145,91 @@ export async function saveContent(content: SiteContent): Promise<void> {
     CacheControl: 'no-cache',
   }));
 }
+
+// =============================================================================
+// Events
+// =============================================================================
+
+import type { Event, BlogPost } from './types';
+
+const EVENTS_KEY = 'content/events.json';
+
+export async function getEvents(): Promise<Event[]> {
+  const client = getS3Client();
+  try {
+    const result = await client.send(new GetObjectCommand({ Bucket: BUCKET, Key: EVENTS_KEY }));
+    const text = await result.Body!.transformToString();
+    return JSON.parse(text) as Event[];
+  } catch (e: unknown) {
+    // File doesn't exist yet — return empty array
+    if ((e as { name?: string }).name === 'NoSuchKey') return [];
+    throw e;
+  }
+}
+
+export async function saveEvents(events: Event[]): Promise<void> {
+  const client = getS3Client();
+  await client.send(new PutObjectCommand({
+    Bucket: BUCKET,
+    Key: EVENTS_KEY,
+    Body: new TextEncoder().encode(JSON.stringify(events, null, 2)),
+    ContentType: 'application/json',
+    CacheControl: 'no-cache',
+  }));
+}
+
+/**
+ * Upload a photo for a specific event.
+ * Returns the S3 key of the uploaded photo.
+ */
+export async function uploadEventPhoto(eventId: string, file: File): Promise<string> {
+  const client = getS3Client();
+  const key = `photos/events/${eventId}/${Date.now()}-${file.name}`;
+  const body = await file.arrayBuffer();
+
+  await client.send(new PutObjectCommand({
+    Bucket: BUCKET,
+    Key: key,
+    Body: new Uint8Array(body),
+    ContentType: file.type,
+  }));
+
+  return key;
+}
+
+/**
+ * Delete a single event photo from S3.
+ */
+export async function deleteEventPhoto(key: string): Promise<void> {
+  const client = getS3Client();
+  await client.send(new DeleteObjectCommand({ Bucket: BUCKET, Key: key }));
+}
+
+// =============================================================================
+// Blog Posts
+// =============================================================================
+
+const POSTS_KEY = 'content/posts.json';
+
+export async function getPosts(): Promise<BlogPost[]> {
+  const client = getS3Client();
+  try {
+    const result = await client.send(new GetObjectCommand({ Bucket: BUCKET, Key: POSTS_KEY }));
+    const text = await result.Body!.transformToString();
+    return JSON.parse(text) as BlogPost[];
+  } catch (e: unknown) {
+    if ((e as { name?: string }).name === 'NoSuchKey') return [];
+    throw e;
+  }
+}
+
+export async function savePosts(posts: BlogPost[]): Promise<void> {
+  const client = getS3Client();
+  await client.send(new PutObjectCommand({
+    Bucket: BUCKET,
+    Key: POSTS_KEY,
+    Body: new TextEncoder().encode(JSON.stringify(posts, null, 2)),
+    ContentType: 'application/json',
+    CacheControl: 'no-cache',
+  }));
+}

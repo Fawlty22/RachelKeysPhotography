@@ -90,3 +90,46 @@ export async function fetchPhotos(location: PhotoLocation): Promise<PhotoEntry[]
     return [];
   }
 }
+
+// ---------------------------------------------------------------------------
+// Events
+// ---------------------------------------------------------------------------
+
+import type { Event, BlogPost } from '@/types/content';
+
+/**
+ * Fetch all events from the CDN. Filters to published-only should happen
+ * at the call site so draft state is maintained correctly.
+ * Returns [] if the file doesn't exist yet.
+ */
+export async function fetchEvents(): Promise<Event[]> {
+  try {
+    const res = await fetch(`${PHOTOS_CDN}/content/events.json`, {
+      cache: 'force-cache',
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return (await res.json()) as Event[];
+  } catch {
+    return [];
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Blog Posts
+// ---------------------------------------------------------------------------
+
+/**
+ * Fetch all blog posts from the CDN.
+ * Returns [] if the file doesn't exist yet.
+ */
+export async function fetchPosts(): Promise<BlogPost[]> {
+  try {
+    const res = await fetch(`${PHOTOS_CDN}/content/posts.json`, {
+      cache: 'force-cache',
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return (await res.json()) as BlogPost[];
+  } catch {
+    return [];
+  }
+}

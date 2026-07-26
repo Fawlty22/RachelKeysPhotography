@@ -50,6 +50,7 @@ export class CmsIdentityPool extends Construct {
           's3:DeleteObject',
         ],
         resources: [
+          // photos/* covers all photo uploads including photos/events/{eventId}/
           `${props.photosBucket.bucketArn}/photos/*`,
           `${props.photosBucket.bucketArn}/content/*`,
         ],

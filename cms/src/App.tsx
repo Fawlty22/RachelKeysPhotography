@@ -5,6 +5,10 @@ import { DashboardPage } from '@/pages/DashboardPage';
 import { PhotosPage } from '@/pages/PhotosPage';
 import { CategoriesPage } from '@/pages/CategoriesPage';
 import { ContentPage } from '@/pages/ContentPage';
+import { EventsPage } from '@/pages/EventsPage';
+import { EventDetailPage } from '@/pages/EventDetailPage';
+import { PostsPage } from '@/pages/PostsPage';
+import { PostDetailPage } from '@/pages/PostDetailPage';
 
 export default function App() {
   return (
@@ -16,6 +20,10 @@ export default function App() {
             <Route path="photos" element={<PhotosPage />} />
             <Route path="categories" element={<CategoriesPage />} />
             <Route path="content" element={<ContentPage />} />
+            <Route path="events" element={<EventsPage />} />
+            <Route path="events/:eventId" element={<EventDetailPage />} />
+            <Route path="posts" element={<PostsPage />} />
+            <Route path="posts/:postId" element={<PostDetailPage />} />
           </Route>
         </Routes>
       </AuthGuard>

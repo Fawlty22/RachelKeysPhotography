@@ -5,6 +5,8 @@ import {
   Images,
   FolderOpen,
   FileText,
+  CalendarDays,
+  BookOpen,
   LogOut,
   Rocket,
   Menu,
@@ -26,6 +28,8 @@ import { cn } from '@/lib/utils';
 const NAV = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/photos', label: 'Photos', icon: Images },
+  { to: '/events', label: 'Events', icon: CalendarDays },
+  { to: '/posts', label: 'Blog Posts', icon: BookOpen },
   { to: '/categories', label: 'Categories', icon: FolderOpen },
   { to: '/content', label: 'Content', icon: FileText },
 ];

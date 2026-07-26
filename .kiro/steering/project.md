@@ -18,8 +18,19 @@ Infra deployed. CMS is built. Portfolio has been migrated from Vite + React SPA 
 
 **What's built and live:**
 - Portfolio: Next.js static site deployed to S3 + CloudFront at rachelkeysphotography.com
-- CMS: Vite + React SPA deployed at admin.rachelkeysphotography.com — Photos and Content pages are fully functional
+- CMS: Vite + React SPA deployed at admin.rachelkeysphotography.com — Photos, Content, Events, and Blog Posts pages are fully functional
 - Build pipeline: Lambda + CodeBuild CDK constructs are written and deployed to AWS
+- Events system: CMS Events page (create/list/delete), EventDetailPage (upload photos, drag-to-reorder with dnd-kit, set cover, publish toggle)
+- Blog system: CMS PostsPage (create/list/delete), PostDetailPage (TipTap rich text editor, photo picker, cover photo, publish toggle)
+- Portfolio public pages: `/portfolio` (event grid, hover effects), `/portfolio/[slug]` (masonry photo wall, PhotoLightbox modal)
+- Blog public pages: `/blog` (post list), `/blog/[slug]` (rich text body, photo gallery)
+- Sitemap updated to include `/portfolio`, `/portfolio/[slug]`, `/blog`, `/blog/[slug]`
+- Nav updated with Portfolio and Blog links using Next.js `<Link>` components
+
+**Content storage:**
+- `content/events.json` — array of Event objects (id, slug, name, date, location, description, category, coverPhotoKey, photos[], publishedAt)
+- `content/posts.json` — array of BlogPost objects (id, slug, title, excerpt, bodyHtml, coverPhotoKey, photoKeys[], eventId, publishedAt, createdAt)
+- Event photos stored at `photos/events/{eventId}/` prefix in the photos bucket (covered by existing `photos/*` IAM policy)
 
 **What's a stub (exists but not implemented):**
 - CMS Dashboard page — renders a heading only
@@ -28,7 +39,6 @@ Infra deployed. CMS is built. Portfolio has been migrated from Vite + React SPA 
 **What's missing / not yet built:**
 - Portfolio Experience section — nav links to `#experience` but the Testimonial section there has only static hardcoded copy
 - Portfolio Investment/pricing section — nav links to `#investment` but the photo Carousel currently occupies that id
-- Full browseable gallery/portfolio page — only a 5-photo Highlights strip exists
 - Pipeline end-to-end test — the source zip has not been uploaded to the source bucket; the triggered rebuild flow has not been verified
 
 ## SEO
